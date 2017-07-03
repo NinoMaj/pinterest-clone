@@ -3,11 +3,16 @@
 import compression from 'compression'
 import express from 'express'
 import bodyParser from 'body-parser'
+import passport from 'passport'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
 
 import routing from './routing'
 import { WEB_PORT, STATIC_PATH, LOCAL_MONGODB_URI } from '../shared/config'
 import { isProd } from '../shared/util'
 import db from './models'
+
+require('./passport')(passport)
 
 const app = express()
 
@@ -18,15 +23,21 @@ if (isProd) {
   db(LOCAL_MONGODB_URI)
 }
 
+app.use(bodyParser())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cookieParser()) // read cookies (needed for auth)
 
+// required for passport
+app.use(session({ secret: 'stop!youshouldnotreadthisbecauseisasecret' })) // session secret
+app.use(passport.initialize())
+app.use(passport.session()) // persistent login sessions
 
 app.use(compression())
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
-routing(app)
+routing(app, passport)
 
 app.listen(WEB_PORT, () => {
   // eslint-disable-next-line no-console
