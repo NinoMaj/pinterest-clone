@@ -27,6 +27,7 @@ import renderApp from './render-app'
 
 export default (app: Object, passport) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
+    console.log(req.user)
     res.send(renderApp(req.url, req, homePage()))
   })
 
@@ -69,7 +70,7 @@ export default (app: Object, passport) => {
   // GITHUB ROUTES
   app.get(AUTH_GITHUB, passport.authenticate('github', { scope: ['user:email'] }))
 
-  app.get(AUTH_GITHUB_CALLBACK, passport.authenticate('google', redirectObj))
+  app.get(AUTH_GITHUB_CALLBACK, passport.authenticate('github', redirectObj))
 
   app.get('/500', () => {
     throw Error('Fake Internal Server Error')

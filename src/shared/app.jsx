@@ -8,7 +8,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import styled from 'styled-components'
 
 import { APP_NAME } from './config'
-import Nav from './component/nav'
+import Nav2 from './component/nav2'
 import HomePage from './component/page/home'
 import SignUpPage from './component/page/sign-up-page'
 import LoginPage from './component/page/login-page'
@@ -32,7 +32,7 @@ const Container = styled.div`
 const App = () => (
   <Container>
     <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
-    <Nav />
+    <Nav2 />
     <Switch>
       <Route
         exact

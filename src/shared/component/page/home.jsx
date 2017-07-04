@@ -4,6 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 
 import { APP_NAME } from '../../config'
+import LoginModal from '../LoginPanel/LoginModal'
 // import HomeCover from '../home-cover'
 // import Cards from '../cards'
 // import Footer from '../footer'
@@ -18,6 +19,7 @@ const HomePage = () => (
       ]}
     />
     <h2>This is homepage</h2>
+    <LoginModal />
   </div>
 )
 
