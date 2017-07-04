@@ -13,6 +13,12 @@ const UserAuthSchema = new mongoose.Schema({
     email: String,
     name: String,
   },
+  github: {
+    id: String,
+    token: String,
+    displayName: String,
+    username: String,
+  },
 })
 
 export default mongoose.model('UserAuth', UserAuthSchema)

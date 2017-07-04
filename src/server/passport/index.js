@@ -2,6 +2,7 @@
 
 import TwitterStrategy from 'passport-twitter'
 import GoogleStrategy from 'passport-google-oauth'
+import GitHubStrategy from 'passport-github2'
 import User from '../models/userAuth'
 import configAuth from './auth'
 
@@ -113,7 +114,6 @@ module.exports = (passport) => {
           }
           // if there is no user found with that google id, create them
           const newUser = new User()
-
           // set all of the google information in our user model
           newUser.google.id = profile.id // set the users google id
           newUser.google.token = token // we will save the token that google provides to the user
@@ -131,6 +131,65 @@ module.exports = (passport) => {
         user.google.id = profile.id // set the users google id
         user.google.token = token // we will save the token that google provides to the user
         user.google.name = profile.displayName
+
+        // save our user to the database
+        user.save((err) => {
+          if (err) throw err
+          return done(null, user)
+        })
+      }
+    })
+  }))
+
+  passport.use(new GitHubStrategy({
+    clientID: configAuth.githubAuth.clientID,
+    clientSecret: configAuth.githubAuth.clientSecret,
+    callbackURL: configAuth.githubAuth.callbackURL,
+    passReqToCallback: true,
+  },
+  (req, token, refreshToken, profile, done) => {
+    process.nextTick(() => {
+      if (!req.user) {
+        User.findOne({ 'github.id': profile.id }, (err, user) => {
+          if (err) return done(err)
+
+          if (user) {
+            if (!user.github.token) {
+              const addToUser = user
+              addToUser.github.token = token
+              addToUser.github.displayName = profile.displayName
+              addToUser.github.username = profile.username
+
+              user.save((err) => {
+                if (err) throw err
+                return done(null, user)
+              })
+            }
+            return done(null, user) // user found, return that user
+          }
+
+          // if there is no user found with that github id, create them
+          const newUser = new User()
+          // set all of the github information in our user model
+          newUser.github.id = profile.id // set the users github id
+          newUser.github.token = token // we will save the token that github provides to the user
+          newUser.github.displayName = profile.displayName
+          newUser.github.username = profile.username
+
+          // save our user to the database
+          newUser.save((err) => {
+            if (err) throw err
+            return done(null, newUser)
+          })
+        })
+      // user already exists and is logged in, we have to link accounts
+      } else {
+        const user = req.user // pull the user out of the session
+        // set all of the github information in our user model
+        user.github.id = profile.id
+        user.github.token = token
+        user.github.displayName = profile.displayName
+        user.github.username = profile.username
 
         // save our user to the database
         user.save((err) => {

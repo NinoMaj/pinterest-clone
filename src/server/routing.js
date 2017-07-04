@@ -18,6 +18,8 @@ import {
   AUTH_TWITTER_CALLBACK,
   AUTH_GOOGLE,
   AUTH_GOOGLE_CALLBACK,
+  AUTH_GITHUB,
+  AUTH_GITHUB_CALLBACK,
 } from '../shared/routes'
 
 import renderApp from './render-app'
@@ -64,6 +66,16 @@ export default (app: Object, passport) => {
 
   app.get(AUTH_GOOGLE_CALLBACK,
     passport.authenticate('google', {
+      successRedirect: HOME_PAGE_ROUTE,
+      failureRedirect: LOGIN_PAGE_ROUTE,
+    }),
+  )
+
+  // GITHUB ROUTES
+  app.get(AUTH_GITHUB, passport.authenticate('github', { scope: ['user:email'] }))
+
+  app.get(AUTH_GITHUB_CALLBACK,
+    passport.authenticate('github', {
       successRedirect: HOME_PAGE_ROUTE,
       failureRedirect: LOGIN_PAGE_ROUTE,
     }),

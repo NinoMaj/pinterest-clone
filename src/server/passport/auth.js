@@ -10,4 +10,10 @@ module.exports = {
     clientSecret: 'ZZ1HpdcWZhPeUqQJkl848mmW',
     callbackURL: 'http://localhost:8000/auth/google/callback',
   },
+
+  githubAuth: {
+    clientID: 'c44d960c8b1e4fa06dbf',
+    clientSecret: '8e9543472f29e4be0044694f93ad0aa59188b402',
+    callbackURL: 'http://localhost:8000/auth/github/callback',
+  },
 }
