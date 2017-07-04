@@ -12,6 +12,7 @@ import { WEB_PORT, STATIC_PATH, LOCAL_MONGODB_URI } from '../shared/config'
 import { isProd } from '../shared/util'
 import db from './models'
 
+require('dotenv').config() // Load .env variables
 require('./passport')(passport)
 
 const app = express()
@@ -29,7 +30,7 @@ app.use(bodyParser.json())
 app.use(cookieParser()) // read cookies (needed for auth)
 
 // required for passport
-app.use(session({ secret: 'stop!youshouldnotreadthisbecauseisasecret' })) // session secret
+app.use(session({ secret: process.env.PASSPORT_SECRET })) // session secret
 app.use(passport.initialize())
 app.use(passport.session()) // persistent login sessions
 

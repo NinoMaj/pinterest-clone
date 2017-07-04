@@ -20,7 +20,7 @@ module.exports = (passport) => {
   passport.use(new TwitterStrategy({
     // pull in our app id and secret from our auth.js file
     consumerKey: configAuth.twitterAuth.consumerKey,
-    consumerSecret: configAuth.twitterAuth.consumerSecret,
+    consumerSecret: process.env.TWITTER_SECRET,
     callbackURL: configAuth.twitterAuth.callbackURL,
     passReqToCallback: true,
   },
@@ -86,7 +86,7 @@ module.exports = (passport) => {
 
   passport.use(new GoogleStrategy.OAuth2Strategy({
     clientID: configAuth.googleAuth.clientID,
-    clientSecret: configAuth.googleAuth.clientSecret,
+    clientSecret: process.env.GOOGLE_SECRET,
     callbackURL: configAuth.googleAuth.callbackURL,
     passReqToCallback: true,
   },
@@ -143,7 +143,7 @@ module.exports = (passport) => {
 
   passport.use(new GitHubStrategy({
     clientID: configAuth.githubAuth.clientID,
-    clientSecret: configAuth.githubAuth.clientSecret,
+    clientSecret: process.env.GITHUB_SECRET,
     callbackURL: configAuth.githubAuth.callbackURL,
     passReqToCallback: true,
   },
