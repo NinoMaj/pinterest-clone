@@ -4,7 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 
 import { APP_NAME } from '../../config'
-import LoginModal from '../LoginPanel/LoginModal'
+import LoginModal from '../LoginModal/LoginModal'
 // import HomeCover from '../home-cover'
 // import Cards from '../cards'
 // import Footer from '../footer'

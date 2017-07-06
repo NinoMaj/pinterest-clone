@@ -24,10 +24,13 @@ import {
 
 import renderApp from './render-app'
 
+// route middleware to make sure an user is logged in
+function isLoggedIn(req, res, next) {
+  return req.isAuthenticated() ? next() : res.redirect('/')
+}
 
 export default (app: Object, passport) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
-    console.log(req.user)
     res.send(renderApp(req.url, req, homePage(req.user)))
   })
 
@@ -39,11 +42,11 @@ export default (app: Object, passport) => {
     res.send(renderApp(req.url, req, loginPage()))
   })
 
-  app.get(SETTINGS_PAGE_ROUTE, (req, res) => {
+  app.get(SETTINGS_PAGE_ROUTE, isLoggedIn, (req, res) => {
     res.send(renderApp(req.url, req, settingsePage()))
   })
 
-  app.get(LOGOUT_PAGE_ROUTE, (req, res) => {
+  app.get(LOGOUT_PAGE_ROUTE, isLoggedIn, (req, res) => {
     req.logout()
     res.send(renderApp(req.url, req, logoutPage()))
   })
@@ -87,8 +90,3 @@ export default (app: Object, passport) => {
     res.status(500).send('Something went wrong!')
   })
 }
-
-// route middleware to make sure an user is logged in
-// function isLoggedIn(req, res, next) {
-//   return req.isAuthenticated() ? next() : res.redirect('/')
-// }
