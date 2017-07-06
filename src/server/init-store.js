@@ -10,6 +10,7 @@ const initStore = (plainPartialState: ?Object) => {
 
   if (plainPartialState && plainPartialState.user) {
     // flow-disable-next-line
+    preloadedState.user = Object.assign({}, userReducer(undefined, {}), plainPartialState.user)
   }
 
   return createStore(combineReducers({

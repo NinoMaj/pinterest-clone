@@ -1,6 +1,15 @@
 // @flow
 
-export const homePage = () => null
+export const homePage = (user) => {
+  if (user) {
+    return ({
+      user: { logged: true },
+    })
+  }
+  return ({
+    user: { logged: false },
+  })
+}
 export const signUpPage = () => null
 export const loginPage = () => null
 export const settingsePage = () => null

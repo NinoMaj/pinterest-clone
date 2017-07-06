@@ -21,6 +21,7 @@ const renderApp = (
   routerContext: ?Object = {},
   ) => {
   const store = initStore(plainPartialState)
+  console.log('store', store.getState())
   const sheet = new ServerStyleSheet()
   const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(
     <Provider store={store}>

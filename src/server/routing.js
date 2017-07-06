@@ -28,7 +28,7 @@ import renderApp from './render-app'
 export default (app: Object, passport) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
     console.log(req.user)
-    res.send(renderApp(req.url, req, homePage()))
+    res.send(renderApp(req.url, req, homePage(req.user)))
   })
 
   app.get(SIGN_UP_PAGE_ROUTE, (req, res) => {
