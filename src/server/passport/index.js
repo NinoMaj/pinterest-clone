@@ -3,7 +3,7 @@
 import TwitterStrategy from 'passport-twitter'
 import GoogleStrategy from 'passport-google-oauth'
 import GitHubStrategy from 'passport-github2'
-import User from '../models/userAuth'
+import User from '../models/user'
 import configAuth from './auth'
 
 module.exports = (passport) => {
