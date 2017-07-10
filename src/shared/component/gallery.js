@@ -27,7 +27,7 @@ const Gallery = () => {
       className="grid"
       data-masonry='{
         "itemSelector": ".grid-item",
-        "gutter": 2,
+        "gutter": 15,
         "columnWidth": 236,
         "fitWidth": true
       }'
