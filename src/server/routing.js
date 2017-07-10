@@ -27,6 +27,7 @@ import renderApp from './render-app'
 
 export default (app: Object, passport) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
+    // eslint-disable-next-line no-console
     console.log(req.user)
     res.send(renderApp(req.url, req, homePage(req.user)))
   })

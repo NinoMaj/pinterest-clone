@@ -21,7 +21,6 @@ const renderApp = (
   routerContext: ?Object = {},
   ) => {
   const store = initStore(plainPartialState)
-  console.log('store', store.getState())
   const sheet = new ServerStyleSheet()
   const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(
     <Provider store={store}>
@@ -58,6 +57,7 @@ const renderApp = (
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
         </script>
+        <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/masonry.pkgd.min.js"></script>
         <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
       </body>
     </html>`
