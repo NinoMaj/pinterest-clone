@@ -10,7 +10,6 @@ const initialState = {
   country: '',
   city: '',
   state: '',
-  dateCreated: '',
   projects: [],
   error: '',
 }
@@ -41,8 +40,18 @@ const userReducer = (state = initialState, action) => {
     case types.UPDATE_STATE:
       return Object.assign({}, state, { state: action.state })
 
-    // case 'ADD_DATE_CREATED':     //can't use Date beacuse is unpure
-    //   return Object.assign({}, state, { dateCreated: ???})
+    case types.ADD_PROJECT:
+      return Object.assign({}, state, {
+        projects: [...state.projects, action.projectObj],
+      })
+
+    case types.REMOVE_PROJECT:
+      return Object.assign({}, state, {
+        projects: [
+          ...state.projects.slice(0, action.index),
+          ...state.projects.slice(action.index + 1),
+        ],
+      })
 
     case types.ADD_ERROR:
       return Object.assign({}, state, { error: action.error })
@@ -51,17 +60,5 @@ const userReducer = (state = initialState, action) => {
       return state
   }
 }
-
-// const userReducer = (
-//   state: { loading: boolean, logged: boolean, email: string, error: string } = initialState,
-//   action: { type: string, payload: any },
-// ) => {
-//   switch (action.type) {
-//     case LOGIN_REQUEST:
-//       return Object.assign({}, state, { loading: true })
-//     default:
-//       return state
-//   }
-// }
 
 export default userReducer
