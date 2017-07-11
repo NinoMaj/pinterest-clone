@@ -26,9 +26,9 @@ const addUserToDB = (action, service, req, token, profile, done) => {
 // Function to manage authentication response and save user to database.
 const passportCallback = (service, req, token, refreshToken, profile, done) => {
   process.nextTick(() => {
+    const serviceID = `${service}.id`
     if (!req.user) { // if not user is logged in
       // find the user in the database based on their service id
-      const serviceID = `${service}.id`
       User.findOne({ [serviceID]: profile.id }, (err, user) => {
         // if there is an error, stop everything and return that
         // for example an error connecting to the database
@@ -55,7 +55,14 @@ const passportCallback = (service, req, token, refreshToken, profile, done) => {
       })
     // user already exists and is logged in, we have to link accounts
     } else {
-      addUserToDB('link', service, req, token, profile, done)
+      User.findOne({ [serviceID]: profile.id }, (err, user) => {
+        if (err) return done(err)
+        if (user) {
+          console.error('Error: This account is already registered with another user')
+          return done(null)
+        }
+        addUserToDB('link', service, req, token, profile, done)
+      })
     }
   })
 }
