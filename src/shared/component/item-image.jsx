@@ -42,11 +42,11 @@ type Props ={
   source: string,
 }
 
-const ItemImage = ({ source}: Props) => (
+const ItemImage = ({ source }: Props) => (
   <ImgContainer>
     <Img src={source} alt="pin" />
     <PinButton>
-      <PinText>PIN <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
+      <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
     </PinButton>
   </ImgContainer>
 )

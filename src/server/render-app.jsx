@@ -57,7 +57,7 @@ const renderApp = (
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}
         </script>
-        <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/masonry.pkgd.min.js"></script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
       </body>
     </html>`
