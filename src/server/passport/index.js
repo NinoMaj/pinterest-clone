@@ -58,6 +58,7 @@ const passportCallback = (service, req, token, refreshToken, profile, done) => {
       User.findOne({ [serviceID]: profile.id }, (err, user) => {
         if (err) return done(err)
         if (user) {
+          // eslint-disable-next-line no-console
           console.error('Error: This account is already registered with another user')
           return done(null)
         }
