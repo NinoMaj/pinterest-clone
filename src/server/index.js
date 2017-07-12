@@ -43,5 +43,6 @@ routing(app, passport)
 app.listen(WEB_PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
+  // eslint-disable-next-line no-console
     '(development).\nKeep "npm run dev:wds" running in an other terminal'}.`)
 })

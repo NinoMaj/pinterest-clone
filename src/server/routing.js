@@ -24,11 +24,13 @@ import {
 
 import renderApp from './render-app'
 
+// route middleware to make sure an user is logged in
+function isLoggedIn(req, res, next) {
+  return req.isAuthenticated() ? next() : res.redirect('/')
+}
 
 export default (app: Object, passport) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
-    // eslint-disable-next-line no-console
-    console.log(req.user)
     res.send(renderApp(req.url, req, homePage(req.user)))
   })
 
@@ -40,11 +42,11 @@ export default (app: Object, passport) => {
     res.send(renderApp(req.url, req, loginPage()))
   })
 
-  app.get(SETTINGS_PAGE_ROUTE, (req, res) => {
+  app.get(SETTINGS_PAGE_ROUTE, isLoggedIn, (req, res) => {
     res.send(renderApp(req.url, req, settingsePage()))
   })
 
-  app.get(LOGOUT_PAGE_ROUTE, (req, res) => {
+  app.get(LOGOUT_PAGE_ROUTE, isLoggedIn, (req, res) => {
     req.logout()
     res.send(renderApp(req.url, req, logoutPage()))
   })
@@ -73,6 +75,20 @@ export default (app: Object, passport) => {
 
   app.get(AUTH_GITHUB_CALLBACK, passport.authenticate('github', redirectObj))
 
+
+  // UNLINK ACCOUNTS
+  // Used to unlink accounts just removing the token.
+  // User account will stay active in case they want to reconnect in the future
+  app.get('/unlink/:service', (req, res) => {
+    const [user, service] = [req.user, req.params.service] // get user and service from req
+    user[service].token = undefined
+    user.save((err) => {
+      if (err) throw err
+      res.redirect(SETTINGS_PAGE_ROUTE)
+    })
+  })
+
+
   app.get('/500', () => {
     throw Error('Fake Internal Server Error')
   })
@@ -88,8 +104,3 @@ export default (app: Object, passport) => {
     res.status(500).send('Something went wrong!')
   })
 }
-
-// route middleware to make sure an user is logged in
-// function isLoggedIn(req, res, next) {
-//   return req.isAuthenticated() ? next() : res.redirect('/')
-// }
