@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import { APP_NAME } from './config'
 import Nav2 from './component/nav2'
@@ -29,10 +30,10 @@ const Container = styled.div`
   padding-top: 54px;
 `
 
-const App = () => (
+const App = ({ user }) => (
   <Container>
     <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
-    <Nav2 />
+    <Nav2 user={user.logged} />
     <Switch>
       <Route
         exact
@@ -60,4 +61,8 @@ const App = () => (
   </Container>
 )
 
-export default App
+const mapStateToProps = state => ({
+  user: state.user,
+})
+
+export default connect(mapStateToProps)(App)

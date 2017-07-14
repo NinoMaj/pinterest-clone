@@ -8,7 +8,7 @@ import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../gallery'
 
 const HomePage = () => (
-  <div>
+  <div className="mt-4">
     <Helmet
       meta={[
         { name: 'description', content: 'Hello App is an app to say hello' },
@@ -16,7 +16,6 @@ const HomePage = () => (
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
       ]}
     />
-    <h2>This is homepage</h2>
     <LoginModal />
     <Gallery />
   </div>

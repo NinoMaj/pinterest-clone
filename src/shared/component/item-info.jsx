@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const DescriptionAndPinCount = styled.div`
   display: flex;
   height: 30px;
-  width: 95%;
+  width: 94n%;
   margin: 2px auto;
 `
 const Description = styled.p`
@@ -22,7 +22,7 @@ const PinCount = styled.p`
 
 const Author = styled.div`
   height: 30px;
-  width: 95%;
+  width: 94%;
   margin: 2px auto;
 `
 

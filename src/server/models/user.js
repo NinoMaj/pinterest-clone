@@ -11,8 +11,6 @@ const UserSchema = new mongoose.Schema({
   city: String,
   state: String,
   dateCreated: Date,
-  projects: Array,  // This will be an array of objects. Each object will be a project
-  // To add: liked projects, favorites projects, and maybe a couple more.
   twitter: {
     id: String,
     token: String,

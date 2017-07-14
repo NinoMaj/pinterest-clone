@@ -21,15 +21,18 @@ const Icon = styled.i`
   font-size: 1.5em;
 `
 
-const Nav = () => {
-  const isUserLogged = false
+type Props = {
+  user: boolean,
+}
+
+const Nav = ({ user }) => {
 
   const data = [
     { route: SETTINGS_PAGE_ROUTE, label: <Icon className="fa fa-cog" title="Settings" /> },
     { route: LOGOUT_PAGE_ROUTE, label: <Icon className="fa fa-power-off" title="Logout" /> },
   ]
 
-  const userNav = isUserLogged ? // If user is logged in display settings and logout links
+  const userNav = user ? // If user is logged in display settings and logout links
     (data.map(link => (
       <li className="nav-item" key={link.route}>
         <NavLink
