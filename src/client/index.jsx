@@ -19,6 +19,7 @@ import App from '../shared/app'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 import userReducer from '../shared/reducer/user'
+import projectsReducer from '../shared/reducer/projects'
 
 window.jQuery = $
 window.Tether = Tether
@@ -31,8 +32,11 @@ const preloadedState = window.__PRELOADED_STATE__
 /* eslint-enable no-underscore-dangle */
 const store = createStore(combineReducers(
   { user: userReducer,
+    projects: projectsReducer,
   }),
-  { user: preloadedState.user },
+  { user: preloadedState.user,
+    projects: preloadedState.projects,
+  },
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
@@ -57,3 +61,5 @@ if (module.hot) {
     ReactDOM.render(wrapApp(NextApp, store), rootEl)
   })
 }
+
+export default store

@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import styled from 'styled-components'
 
@@ -12,10 +14,24 @@ const ItemContainer = styled.div`
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
 `
 
-const Item = () => (
+type Props = {
+  author: string,
+  title: string,
+  description: string,
+  imgUrl: string
+}
+
+// https://source.unsplash.com/random/326x300
+
+const Item = ({ author, title, description, imgUrl }: Props) => (
   <ItemContainer className="grid-item" >
-    <ItemImage source={'https://source.unsplash.com/random/326x300'} />
-    <ItemInfo desc={'Description'} pinsCount={Math.floor(Math.random() * 10)} author={'Name'} />
+    <ItemImage source={imgUrl} />
+    <ItemInfo
+      author={author}
+      title={title}
+      description={description}
+      pinsCount={Math.floor(Math.random() * 10)}
+    />
   </ItemContainer>
 )
 export default Item

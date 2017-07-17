@@ -1,7 +1,20 @@
 // @flow
 
-export const homePage = user =>
-  user ? { user: { logged: true } } : { user: { logged: false } }
+export const homePage = (user: Object, projectsInitialState: Object) =>
+  user ?
+  {
+    user: { logged: true },
+    projects: {
+      projects: projectsInitialState,
+    },
+  }
+  :
+  {
+    user: { logged: false },
+    projects: {
+      projects: projectsInitialState,
+    },
+  }
 export const signUpPage = () => null
 export const loginPage = () => null
 export const settingsePage = () => null

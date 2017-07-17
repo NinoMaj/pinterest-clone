@@ -22,11 +22,15 @@
       "port": 5858
     },
     {
+      "name": "Launch server.js via nodemon",
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceRoot}/src/server/index"
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceRoot}/src/server/index.js",
+      "restart": true,
+      "console": "integratedTerminal"
     }
   ],
   "compounds": []
 }
+

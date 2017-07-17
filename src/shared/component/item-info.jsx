@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const DescriptionAndPinCount = styled.div`
   display: flex;
   height: 30px;
-  width: 94n%;
+  width: 94%;
   margin: 2px auto;
 `
 const Description = styled.p`
@@ -35,16 +35,16 @@ const AuthorName = styled.span`
 `
 
 type Props = {
-  desc: string,
+  description: string,
   pinsCount: number,
   author: string,
 }
 
-const ItemInfo = ({ desc, pinsCount, author }: Props) => (
+const ItemInfo = ({ author, description, pinsCount }: Props) => (
   <div>
     <DescriptionAndPinCount>
       <Description>
-        {desc}
+        {description}
       </Description>
       <PinCount>
         <i className="fa fa-thumb-tack" aria-hidden="true" /> {pinsCount}

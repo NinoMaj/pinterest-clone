@@ -59,43 +59,43 @@ describe('User reducer tests', () => {
     expect(userReducer(stateBefore, action)).toEqual(stateAfter)
   })
 
-  test('Adds project object to projects array', () => {
-    const stateBefore = {
-      userName: 'MichaelScottDF',
-      projects: [
-        { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
-      ],
-    }
-    const stateAfter = {
-      userName: 'MichaelScottDF',
-      projects: [
-        { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
-        { projectName: 'Twitter Clone', Author: 'Michael Scott' },
-      ],
-    }
-    const action = actions.addProject(
-      { projectName: 'Twitter Clone', Author: 'Michael Scott' },
-    )
-    expect(userReducer(stateBefore, action)).toEqual(stateAfter)
-  })
+  // test('Adds project object to projects array', () => {
+  //   const stateBefore = {
+  //     userName: 'MichaelScottDF',
+  //     projects: [
+  //       { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
+  //     ],
+  //   }
+  //   const stateAfter = {
+  //     userName: 'MichaelScottDF',
+  //     projects: [
+  //       { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
+  //       { projectName: 'Twitter Clone', Author: 'Michael Scott' },
+  //     ],
+  //   }
+  //   const action = actions.addProject(
+  //     { projectName: 'Twitter Clone', Author: 'Michael Scott' },
+  //   )
+  //   expect(userReducer(stateBefore, action)).toEqual(stateAfter)
+  // })
 
-  test('Removes project object from projects array', () => {
-    const stateBefore = {
-      userName: 'MichaelScottDF',
-      projects: [
-        { projectName: 'Twitter Clone', Author: 'Michael Scott' },
-        { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
-      ],
-    }
-    const stateAfter = {
-      userName: 'MichaelScottDF',
-      projects: [
-        { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
-      ],
-    }
-    const action = actions.removeProject(0)
-    expect(userReducer(stateBefore, action)).toEqual(stateAfter)
-  })
+  // test('Removes project object from projects array', () => {
+  //   const stateBefore = {
+  //     userName: 'MichaelScottDF',
+  //     projects: [
+  //       { projectName: 'Twitter Clone', Author: 'Michael Scott' },
+  //       { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
+  //     ],
+  //   }
+  //   const stateAfter = {
+  //     userName: 'MichaelScottDF',
+  //     projects: [
+  //       { projectName: 'Dunder Mifflin Chat', Author: 'Michael Scott' },
+  //     ],
+  //   }
+  //   const action = actions.removeProject(0)
+  //   expect(userReducer(stateBefore, action)).toEqual(stateAfter)
+  // })
 
   test('Unknown action returns state', () => {
     const stateBefore = { logged: false, userName: 'ChuckNorris17', country: 'Canada' }

@@ -1,7 +1,11 @@
+// @flow
+
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import Item from './item'
+import AddProject from './add-project-button'
 
 const Container = styled.div`
   margin: 0 auto;
@@ -12,29 +16,46 @@ const Container = styled.div`
     clear: both;
   }
 `
+type Props = {
+  projects: any[]
+}
 
-const Gallery = () => {
+const Gallery = ({ projects }: Props) => {
   let childElements = null
-  if (typeof window !== 'undefined') {
-    const elements = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    childElements = elements.map(element => (
-      <Item key={element} />
+  if (typeof window !== 'undefined' && projects.length > 0) {
+    childElements = projects.map(project => (
+      <Item
+        key={project._id}
+        author={project.author}
+        title={project.title}
+        description={project.description}
+        imgUrl={project.imgUrl}
+      />
     ))
   }
 
   return (
-    <Container
-      className="grid"
-      data-masonry='{
+    <div>
+      <Container
+        className="grid"
+        data-masonry='{
         "itemSelector": ".grid-item",
         "gutter": 15,
         "columnWidth": 236,
         "fitWidth": true
       }'
-    >
-      {childElements}
-    </Container>
+      >
+        {childElements}
+      </Container>
+      <AddProject />
+    </div>
   )
 }
 
-export default Gallery
+// export default Gallery
+
+const mapStateToProps = state => ({
+  projects: state.projects.projects,
+})
+
+export default connect(mapStateToProps)(Gallery)

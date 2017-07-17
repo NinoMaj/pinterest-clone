@@ -1,7 +1,7 @@
-// @flow
-
 import React from 'react'
 import styled from 'styled-components'
+
+import { STATIC_PATH } from '../config'
 
 const ImgContainer = styled.div`
   position: relative;
@@ -31,24 +31,41 @@ const PinButton = styled.div`
   cursor: pointer;
 
   ${ImgContainer}:hover & {
-	  display: block;
+	  Sdisplay: block;
 	}
 `
 const PinText = styled.p`
   padding-top: 3px;
 `
 
-type Props ={
-  source: string,
-}
+class ItemImage extends React.Component {
+  constructor() {
+    super()
 
-const ItemImage = ({ source }: Props) => (
-  <ImgContainer>
-    <Img src={source} alt="pin" />
-    <PinButton>
-      <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
-    </PinButton>
-  </ImgContainer>
-)
+    this.state = {
+      error: false
+    }
+
+    this.imgError = this.imgError.bind(this)
+  }
+
+  imgError() {
+    this.setState({
+      error: true
+    })
+  }
+
+  render() {
+    const image = (this.state.error) ? (<Img src={`${STATIC_PATH}/images/noimage.gif`} alt="no image" />) : (<Img src={this.props.source} alt="pin" onError={this.imgError} />)
+    return (
+      <ImgContainer>
+        {image}
+        <PinButton>
+          <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
+        </PinButton>
+      </ImgContainer>
+    )
+  }
+}
 
 export default ItemImage

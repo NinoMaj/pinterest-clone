@@ -20,6 +20,8 @@ const renderApp = (
   plainPartialState: ?Object,
   routerContext: ?Object = {},
   ) => {
+  console.log('plainPartialState', plainPartialState)
+  debugger
   const store = initStore(plainPartialState)
   const sheet = new ServerStyleSheet()
   const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(

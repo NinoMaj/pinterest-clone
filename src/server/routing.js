@@ -22,6 +22,10 @@ import {
   AUTH_GITHUB_CALLBACK,
 } from '../shared/routes'
 
+import Project from './models/project'
+
+import projects from './api/project'
+
 import renderApp from './render-app'
 
 // route middleware to make sure an user is logged in
@@ -29,9 +33,26 @@ function isLoggedIn(req, res, next) {
   return req.isAuthenticated() ? next() : res.redirect('/')
 }
 
-export default (app: Object, passport) => {
+export default (app: Object, passport: Object) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, req, homePage(req.user)))
+    const initialStatePromise = new Promise((resolve, reject) => {
+      const promise = Project.find({}).exec()
+      promise.then(projectsInitialState => (
+        resolve(projectsInitialState)
+      ))
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log('Error in get books API:', err)
+        reject(err)
+      })
+    })
+    initialStatePromise.then((projectsInitialState) => {
+      res.send(renderApp(req.url, req, homePage(req.user, projectsInitialState)))
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error('Get projects error', JSON.stringify(err))
+    })
   })
 
   app.get(SIGN_UP_PAGE_ROUTE, (req, res) => {
@@ -88,6 +109,7 @@ export default (app: Object, passport) => {
     })
   })
 
+  app.use('/api/projects', projects)
 
   app.get('/500', () => {
     throw Error('Fake Internal Server Error')

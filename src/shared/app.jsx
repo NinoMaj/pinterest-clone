@@ -23,6 +23,7 @@ import {
   SETTINGS_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from './routes'
+import { getProjects } from './actions/projectActions'
 
 injectTapEventPlugin()
 
@@ -30,39 +31,52 @@ const Container = styled.div`
   padding-top: 54px;
 `
 
-const App = ({ user }) => (
-  <Container>
-    <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
-    <Nav2 user={user.logged} />
-    <Switch>
-      <Route
-        exact
-        path={HOME_PAGE_ROUTE}
-        render={() => <HomePage />}
-      />
-      <Route
-        path={SIGN_UP_PAGE_ROUTE}
-        render={history => <SignUpPage history={history.history} />}
-      />
-      <Route
-        path={LOGIN_PAGE_ROUTE}
-        render={history => <LoginPage history={history.history} />}
-      />
-      <Route
-        path={SETTINGS_PAGE_ROUTE}
-        render={history => <SettingsPage history={history.history} />}
-      />
-      <Route
-        path={LOGOUT_PAGE_ROUTE}
-        render={history => <LogoutPage history={history.history} />}
-      />
-      <Route component={NotFoundPage} />
-    </Switch>
-  </Container>
-)
+class App extends React.Component {
+
+  // componentDidMount() {
+  // // this.props.getProjectsAction()
+  // }
+
+  render() {
+    return (
+      <Container>
+        <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
+        <Nav2 user={this.props.user.logged} />
+        <Switch>
+          <Route
+            exact
+            path={HOME_PAGE_ROUTE}
+            render={() => <HomePage />}
+          />
+          <Route
+            path={SIGN_UP_PAGE_ROUTE}
+            render={history => <SignUpPage history={history.history} />}
+          />
+          <Route
+            path={LOGIN_PAGE_ROUTE}
+            render={history => <LoginPage history={history.history} />}
+          />
+          <Route
+            path={SETTINGS_PAGE_ROUTE}
+            render={history => <SettingsPage history={history.history} />}
+          />
+          <Route
+            path={LOGOUT_PAGE_ROUTE}
+            render={history => <LogoutPage history={history.history} />}
+          />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Container>
+    )
+  }
+}
 
 const mapStateToProps = state => ({
   user: state.user,
 })
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => ({
+  getProjectsAction: () => (dispatch(getProjects())),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

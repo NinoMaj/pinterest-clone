@@ -25,7 +25,7 @@ type Props = {
   user: boolean,
 }
 
-const Nav = ({ user }) => {
+const Nav = ({ user }: Props) => {
 
   const data = [
     { route: SETTINGS_PAGE_ROUTE, label: <Icon className="fa fa-cog" title="Settings" /> },
