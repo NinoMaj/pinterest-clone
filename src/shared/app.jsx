@@ -9,21 +9,18 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { APP_NAME } from './config'
-import Nav2 from './component/nav2'
+import Nav from './component/nav'
 import HomePage from './component/page/home'
-import SignUpPage from './component/page/sign-up-page'
-import LoginPage from './component/page/login-page'
+import MyProjectsPage from './component/page/my-projects-page'
 import SettingsPage from './component/page/settings-page'
 import LogoutPage from './component/page/logout-page'
 import NotFoundPage from './component/page/not-found'
 import {
   HOME_PAGE_ROUTE,
-  SIGN_UP_PAGE_ROUTE,
-  LOGIN_PAGE_ROUTE,
+  MY_PROJECTS_ROUTE,
   SETTINGS_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from './routes'
-import { getProjects } from './actions/projectActions'
 
 injectTapEventPlugin()
 
@@ -31,52 +28,39 @@ const Container = styled.div`
   padding-top: 54px;
 `
 
-class App extends React.Component {
-
-  // componentDidMount() {
-  // // this.props.getProjectsAction()
-  // }
-
-  render() {
-    return (
-      <Container>
-        <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
-        <Nav2 user={this.props.user.logged} />
-        <Switch>
-          <Route
-            exact
-            path={HOME_PAGE_ROUTE}
-            render={() => <HomePage />}
-          />
-          <Route
-            path={SIGN_UP_PAGE_ROUTE}
-            render={history => <SignUpPage history={history.history} />}
-          />
-          <Route
-            path={LOGIN_PAGE_ROUTE}
-            render={history => <LoginPage history={history.history} />}
-          />
-          <Route
-            path={SETTINGS_PAGE_ROUTE}
-            render={history => <SettingsPage history={history.history} />}
-          />
-          <Route
-            path={LOGOUT_PAGE_ROUTE}
-            render={history => <LogoutPage history={history.history} />}
-          />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Container>
-    )
-  }
+type Props = {
+  user: boolean,
 }
 
+const App = ({ user }: Props) => (
+  <Container>
+    <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
+    <Nav user={user} />
+    <Switch>
+      <Route
+        exact
+        path={HOME_PAGE_ROUTE}
+        render={() => <HomePage />}
+      />
+      <Route
+        path={MY_PROJECTS_ROUTE}
+        render={history => <MyProjectsPage history={history.history} />}
+      />
+      <Route
+        path={SETTINGS_PAGE_ROUTE}
+        render={history => <SettingsPage history={history.history} />}
+      />
+      <Route
+        path={LOGOUT_PAGE_ROUTE}
+        render={history => <LogoutPage history={history.history} />}
+      />
+      <Route component={NotFoundPage} />
+    </Switch>
+  </Container>
+)
+
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.user.logged,
 })
 
-const mapDispatchToProps = dispatch => ({
-  getProjectsAction: () => (dispatch(getProjects())),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)

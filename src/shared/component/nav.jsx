@@ -8,8 +8,7 @@ import styled from 'styled-components'
 import { APP_NAME } from '../config'
 import {
   HOME_PAGE_ROUTE,
-  SIGN_UP_PAGE_ROUTE,
-  LOGIN_PAGE_ROUTE,
+  MY_PROJECTS_ROUTE,
   SETTINGS_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from '../routes'
@@ -23,15 +22,22 @@ const Icon = styled.i`
   font-size: 1.5em;
 `
 
-const Nav = () => {
-  const userNav = false ?
+type Props = {
+  user: boolean,
+}
+
+const Nav = ({ user }: Props) => {
+  const leftNav = user ?
   [
-      { route: SETTINGS_PAGE_ROUTE, label: <Icon className="fa fa-cog" title="Settings" /> },
-      { route: LOGOUT_PAGE_ROUTE, label: <Icon className="fa fa-power-off" title="Logout" /> },
-  ] : [
-      { route: SIGN_UP_PAGE_ROUTE, label: 'Sign-up page' },
-      { route: LOGIN_PAGE_ROUTE, label: 'Login page' },
+    { route: HOME_PAGE_ROUTE, label: 'Home' },
+    { route: MY_PROJECTS_ROUTE, label: 'My projects' },
   ]
+  :
+  [
+    { route: HOME_PAGE_ROUTE, label: 'Home' },
+    { route: MY_PROJECTS_ROUTE, label: 'My projects' },
+  ]
+
   return (
     <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
@@ -39,9 +45,10 @@ const Nav = () => {
       </button>
       <Link to={HOME_PAGE_ROUTE} className="navbar-brand">{APP_NAME}</Link>
       <div className="js-navbar-collapse collapse navbar-collapse">
+        
         <ul className="navbar-nav mr-auto">
           {[
-            { route: HOME_PAGE_ROUTE, label: 'Home' },
+            ...leftNav,
           ]
           .map(link => (
             <li className="nav-item" key={link.route}>
@@ -49,15 +56,27 @@ const Nav = () => {
             </li>
           ))}
         </ul>
-        <ul className="navbar-nav ml-auto">
-          {[
-            ...userNav,
-          ].map(link => (
-            <li className="nav-item" key={link.route}>
-              <NavLink to={link.route} className="nav-link" activeStyle={{ color: 'white' }} exact onClick={handleNavLinkClick}>{link.label}</NavLink>
-            </li>
-          ))}
-        </ul>
+
+        {user ? (
+          <ul className="navbar-nav ml-auto">
+            {[
+              { route: SETTINGS_PAGE_ROUTE, label: <Icon className="fa fa-cog" title="Settings" /> },
+              { route: LOGOUT_PAGE_ROUTE, label: <Icon className="fa fa-power-off" title="Logout" /> },
+            ].map(link => (
+              <li className="nav-item" key={link.route}>
+                <NavLink to={link.route} className="nav-link" activeStyle={{ color: 'white' }} exact onClick={handleNavLinkClick}>{link.label}</NavLink>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="navbar-nav ml-auto">
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+              Sign in
+            </button>
+          </ul>
+          )}
+
+        
       </div>
     </nav>
   )

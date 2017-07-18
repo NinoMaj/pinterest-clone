@@ -2,16 +2,12 @@
 
 import {
   homePage,
-  signUpPage,
-  loginPage,
   settingsePage,
   logoutPage,
 } from './controller'
 
 import {
   HOME_PAGE_ROUTE,
-  SIGN_UP_PAGE_ROUTE,
-  LOGIN_PAGE_ROUTE,
   SETTINGS_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
   AUTH_TWITTER,
@@ -55,14 +51,6 @@ export default (app: Object, passport: Object) => {
     })
   })
 
-  app.get(SIGN_UP_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, req, signUpPage()))
-  })
-
-  app.get(LOGIN_PAGE_ROUTE, (req, res) => {
-    res.send(renderApp(req.url, req, loginPage()))
-  })
-
   app.get(SETTINGS_PAGE_ROUTE, isLoggedIn, (req, res) => {
     res.send(renderApp(req.url, req, settingsePage()))
   })
@@ -74,7 +62,7 @@ export default (app: Object, passport: Object) => {
 
   const redirectObj = {
     successRedirect: HOME_PAGE_ROUTE,
-    failureRedirect: LOGIN_PAGE_ROUTE,
+    failureRedirect: HOME_PAGE_ROUTE,
   }
 
   // Redirect the user to Twitter for authentication.

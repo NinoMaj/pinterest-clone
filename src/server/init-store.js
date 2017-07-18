@@ -9,7 +9,7 @@ import projectsReducer from '../shared/reducer/projects'
 const initStore = (plainPartialState: ?Object) => {
   const preloadedState = plainPartialState ? {} : undefined
 
-  if (plainPartialState && plainPartialState.user) {
+  if (plainPartialState) {
     // flow-disable-next-line
     preloadedState.user = Object.assign({}, userReducer(undefined, {}), plainPartialState.user)
     preloadedState.projects = Object.assign(

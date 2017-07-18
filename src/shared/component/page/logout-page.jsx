@@ -12,7 +12,7 @@ type Props = {
 
 const LogoutPage = ({ history }: Props) => {
   setTimeout(() => {
-    history.push('/login')
+    history.push('/')
   }, 2000)
   return (<div className="container mt-4">
     <Helmet

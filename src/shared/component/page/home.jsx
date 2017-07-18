@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 
 import { APP_NAME } from '../../config'
 import LoginModal from '../LoginModal/LoginModal'
-import Gallery from '../gallery'
+import Gallery from '../../container/gallery'
 import Modal from '../modal'
 import AddProjectModal from '../add-project-modal'
 
