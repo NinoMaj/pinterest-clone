@@ -23,7 +23,10 @@ type Props = {
 
 const Item = ({ author, title, description, imgUrl }: Props) => (
   <ItemContainer className="grid-item" >
-    <ItemImage source={imgUrl} />
+    <ItemImage
+      source={imgUrl}
+      height={`${((description.length % 10) * 10) + 250}px`}
+    />
     <ItemInfo
       author={author}
       title={title}

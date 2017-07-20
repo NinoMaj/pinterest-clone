@@ -7,7 +7,7 @@ const ImgContainer = styled.div`
   position: relative;
 `
 const Img = styled.img`
-  height: 250px;
+  height: ${props => props.height};
   width: 226px;
   margin: 5px auto;
   display: block;
@@ -40,11 +40,12 @@ const PinText = styled.p`
 
 type Props = {
   source: string,
+  height: string,
 }
 
-const ItemImage = ({ source }: Props) => (
+const ItemImage = ({ source, height }: Props) => (
   <ImgContainer>
-    <Img src={source} alt="project" />
+    <Img src={source} alt="project" height={height} />
     <PinButton>
       <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
     </PinButton>
