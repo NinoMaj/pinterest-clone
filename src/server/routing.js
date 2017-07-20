@@ -2,12 +2,14 @@
 
 import {
   homePage,
+  myProjectsPage,
   settingsePage,
   logoutPage,
 } from './controller'
 
 import {
   HOME_PAGE_ROUTE,
+  MY_PROJECTS_ROUTE,
   SETTINGS_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
   AUTH_TWITTER,
@@ -51,6 +53,10 @@ export default (app: Object, passport: Object) => {
       // eslint-disable-next-line no-console
       console.error('Get projects error', JSON.stringify(err))
     })
+  })
+
+  app.get(MY_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
+    res.send(renderApp(req.url, req, myProjectsPage()))
   })
 
   app.get(SETTINGS_PAGE_ROUTE, isLoggedIn, (req, res) => {

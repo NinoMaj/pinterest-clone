@@ -39,7 +39,6 @@ const Nav = ({ user }: Props) => {
   :
   [
     { route: HOME_PAGE_ROUTE, label: 'Home' },
-    { route: MY_PROJECTS_ROUTE, label: 'My projects' },
   ]
 
   return (

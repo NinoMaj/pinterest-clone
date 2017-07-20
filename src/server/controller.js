@@ -15,6 +15,8 @@ export const homePage = (user: Object, projectsInitialState: Object) =>
       projects: projectsInitialState,
     },
   }
+
+export const myProjectsPage = () => null
 export const signUpPage = () => null
 export const loginPage = () => null
 export const settingsePage = () => null

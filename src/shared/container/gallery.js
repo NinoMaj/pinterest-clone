@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
+import { MY_PROJECTS_ROUTE } from '../routes'
 import Item from '../component/item'
 import AddProject from '../component/add-project-button'
 
@@ -17,21 +18,34 @@ const Container = styled.div`
   }
 `
 type Props = {
-  projects: any[]
+  projects: any[],
+  page: string,
 }
 
-const Gallery = ({ projects }: Props) => {
+const Gallery = ({ projects, page }: Props) => {
   let childElements = null
   if (projects.length > 0) {
-    childElements = projects.map(project => (
-      <Item
-        key={project._id}
-        author={project.author}
-        title={project.title}
-        description={project.description}
-        imgUrl={project.imgUrl}
-      />
-    ))
+    if (page === MY_PROJECTS_ROUTE) {
+      childElements = projects.filter(project => project.author === 'author').map(myProject => (
+        <Item
+          key={myProject._id}
+          author={'me'}
+          title={myProject.title}
+          description={myProject.description}
+          imgUrl={myProject.imgUrl}
+        />
+      ))
+    } else {
+      childElements = projects.map(project => (
+        <Item
+          key={project._id}
+          author={project.author}
+          title={project.title}
+          description={project.description}
+          imgUrl={project.imgUrl}
+        />
+      ))
+    }
   }
 
   return (

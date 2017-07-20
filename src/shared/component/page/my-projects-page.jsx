@@ -3,6 +3,9 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
+import { MY_PROJECTS_ROUTE } from '../../routes'
+import Gallery from '../../container/gallery'
+
 const title = 'My projects page'
 
 const MyProjectsPage = () => (
@@ -16,7 +19,8 @@ const MyProjectsPage = () => (
     />
     <div className="row">
       <div className="col-12">
-        <p>My projects page</p>
+        <h3>My projects:</h3>
+        <Gallery page={MY_PROJECTS_ROUTE} />
       </div>
     </div>
   </div>

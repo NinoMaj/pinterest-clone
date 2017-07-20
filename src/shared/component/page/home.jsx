@@ -4,6 +4,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 
 import { APP_NAME } from '../../config'
+import { HOME_PAGE_ROUTE } from '../../routes'
 import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../../container/gallery'
 import Modal from '../modal'
@@ -19,7 +20,7 @@ const HomePage = () => (
       ]}
     />
     <LoginModal />
-    <Gallery />
+    <Gallery page={HOME_PAGE_ROUTE} />
     <Modal>
       <AddProjectModal />
     </Modal>
