@@ -1,7 +1,7 @@
+// @flow
+
 import React from 'react'
 import styled from 'styled-components'
-
-import { STATIC_PATH } from '../config'
 
 const ImgContainer = styled.div`
   position: relative;
@@ -31,16 +31,20 @@ const PinButton = styled.div`
   cursor: pointer;
 
   ${ImgContainer}:hover & {
-	  Sdisplay: block;
+	  display: block;
 	}
 `
 const PinText = styled.p`
   padding-top: 3px;
 `
 
-const ItemImage = () => (
+type Props = {
+  source: string,
+}
+
+const ItemImage = ({ source }: Props) => (
   <ImgContainer>
-    <Img src={this.props.source} alt="pin" />
+    <Img src={source} alt="project" />
     <PinButton>
       <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
     </PinButton>

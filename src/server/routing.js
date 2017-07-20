@@ -33,15 +33,17 @@ export default (app: Object, passport: Object) => {
   app.get(HOME_PAGE_ROUTE, (req, res) => {
     const initialStatePromise = new Promise((resolve, reject) => {
       const promise = Project.find({}).exec()
+
       promise.then(projectsInitialState => (
         resolve(projectsInitialState)
       ))
       .catch((err) => {
         // eslint-disable-next-line no-console
-        console.log('Error in get books API:', err)
+        console.log('Error in get projects API:', err)
         reject(err)
       })
     })
+
     initialStatePromise.then((projectsInitialState) => {
       res.send(renderApp(req.url, req, homePage(req.user, projectsInitialState)))
     })
