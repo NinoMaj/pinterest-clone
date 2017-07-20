@@ -4,7 +4,6 @@ import Project from '../models/project'
 
 const router = express.Router()
 
-
 // middleware that is specific to this router
 router.use((req, res, next) => {
   // eslint-disable-next-line no-console
@@ -31,6 +30,7 @@ router.post('/add-project', (req, res) => {
     description,
     imgUrl,
   } = req.body
+
 
   const newProject = {
     author,

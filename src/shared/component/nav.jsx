@@ -22,6 +22,10 @@ const Icon = styled.i`
   font-size: 1.5em;
 `
 
+const Button = styled.button`
+  cursor: pointer;
+`
+
 type Props = {
   user: boolean,
 }
@@ -45,7 +49,7 @@ const Nav = ({ user }: Props) => {
       </button>
       <Link to={HOME_PAGE_ROUTE} className="navbar-brand">{APP_NAME}</Link>
       <div className="js-navbar-collapse collapse navbar-collapse">
-        
+
         <ul className="navbar-nav mr-auto">
           {[
             ...leftNav,
@@ -70,9 +74,9 @@ const Nav = ({ user }: Props) => {
           </ul>
         ) : (
           <ul className="navbar-nav ml-auto">
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+            <Button type="button" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">
               Sign in
-            </button>
+            </Button>
           </ul>
           )}
 

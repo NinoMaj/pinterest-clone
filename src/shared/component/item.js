@@ -21,8 +21,6 @@ type Props = {
   imgUrl: string
 }
 
-// https://source.unsplash.com/random/326x300
-
 const Item = ({ author, title, description, imgUrl }: Props) => (
   <ItemContainer className="grid-item" >
     <ItemImage source={imgUrl} />
@@ -30,7 +28,7 @@ const Item = ({ author, title, description, imgUrl }: Props) => (
       author={author}
       title={title}
       description={description}
-      pinsCount={Math.floor(Math.random() * 10)}
+      pinsCount={0}
     />
   </ItemContainer>
 )

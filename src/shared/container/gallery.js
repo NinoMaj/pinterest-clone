@@ -22,7 +22,7 @@ type Props = {
 
 const Gallery = ({ projects }: Props) => {
   let childElements = null
-  if (typeof window !== 'undefined' && projects.length > 0) {
+  if (projects.length > 0) {
     childElements = projects.map(project => (
       <Item
         key={project._id}

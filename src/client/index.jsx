@@ -28,7 +28,7 @@ require('bootstrap')
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 const preloadedState = window.__PRELOADED_STATE__
-
+console.log('on the client', preloadedState)
 /* eslint-enable no-underscore-dangle */
 const store = createStore(combineReducers(
   { user: userReducer,

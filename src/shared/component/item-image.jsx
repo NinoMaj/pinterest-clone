@@ -7,7 +7,7 @@ const ImgContainer = styled.div`
   position: relative;
 `
 const Img = styled.img`
-  height: ${() => ((Math.random() * (300 - 150)) + 150)}px;
+  height: 250px;
   width: 226px;
   margin: 5px auto;
   display: block;
@@ -38,34 +38,13 @@ const PinText = styled.p`
   padding-top: 3px;
 `
 
-class ItemImage extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      error: false
-    }
-
-    this.imgError = this.imgError.bind(this)
-  }
-
-  imgError() {
-    this.setState({
-      error: true
-    })
-  }
-
-  render() {
-    const image = (this.state.error) ? (<Img src={`${STATIC_PATH}/images/noimage.gif`} alt="no image" />) : (<Img src={this.props.source} alt="pin" onError={this.imgError} />)
-    return (
-      <ImgContainer>
-        {image}
-        <PinButton>
-          <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
-        </PinButton>
-      </ImgContainer>
-    )
-  }
-}
+const ItemImage = () => (
+  <ImgContainer>
+    <Img src={this.props.source} alt="pin" />
+    <PinButton>
+      <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
+    </PinButton>
+  </ImgContainer>
+)
 
 export default ItemImage
