@@ -12,13 +12,13 @@ import { APP_NAME } from './config'
 import Nav from './component/nav'
 import HomePage from './component/page/home'
 import MyProjectsPage from './component/page/my-projects-page'
-import SettingsPage from './component/page/settings-page'
+import ProfilePage from './component/page/profile-page'
 import LogoutPage from './component/page/logout-page'
 import NotFoundPage from './component/page/not-found'
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
-  SETTINGS_PAGE_ROUTE,
+  PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from './routes'
 
@@ -47,8 +47,8 @@ const App = ({ user }: Props) => (
         render={history => <MyProjectsPage history={history.history} />}
       />
       <Route
-        path={SETTINGS_PAGE_ROUTE}
-        render={history => <SettingsPage history={history.history} />}
+        path={PROFILE_PAGE_ROUTE}
+        render={history => <ProfilePage history={history.history} />}
       />
       <Route
         path={LOGOUT_PAGE_ROUTE}
