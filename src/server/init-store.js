@@ -13,7 +13,8 @@ const initStore = (plainPartialState: ?Object) => {
     preloadedState.user = Object.assign({}, userReducer(undefined, {}), plainPartialState.user)
     preloadedState.projects = Object.assign(
       {},
-      projectsReducer(undefined, {}), plainPartialState.projects,
+      projectsReducer(undefined, {}),
+      plainPartialState.projects,
     )
   }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import initStore from '../../server/init-store'
+import store from '../../client/store'
 
 // import styled from 'styled-components'
 // const ModalContainer = styled.div`
@@ -39,7 +39,7 @@ class Modal extends React.Component {
 
   _render() {
     ReactDOM.render(
-      <Provider store={initStore()}>
+      <Provider store={store}>
         <div>{this.props.children}</div>
       </Provider>,
       this.modalTarget,

@@ -80,9 +80,8 @@ class AddProject extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addProjectAction: (author, title, description, imgUrl) => {
-    dispatch(addProject(author, title, description, imgUrl))
-  },
+  addProjectAction: (author, title, description, imgUrl) =>
+    dispatch(addProject(author, title, description, imgUrl)),
 })
 
 export default connect(null, mapDispatchToProps)(AddProject)

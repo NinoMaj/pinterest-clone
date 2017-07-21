@@ -24,6 +24,7 @@ const HomePage = () => (
     <Modal>
       <AddProjectModal />
     </Modal>
+    
   </div>
 )
 

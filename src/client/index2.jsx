@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import $ from 'jquery'
 import Tether from 'tether'
 
@@ -15,11 +17,29 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import App from '../shared/app'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
-import store from './store'
+import userReducer from '../shared/reducer/user'
+import projectsReducer from '../shared/reducer/projects'
+import { isProd } from '../shared/util'
 
 window.jQuery = $
 window.Tether = Tether
 require('bootstrap')
+
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
+const preloadedState = window.__PRELOADED_STATE__
+
+/* eslint-enable no-underscore-dangle */
+const store = createStore(combineReducers(
+  {
+    user: userReducer,
+    projects: projectsReducer,
+  }),
+  {
+    user: preloadedState.user,
+    projects: preloadedState.projects,
+  },
+  composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 const wrapApp = (AppComponent, reduxStore) =>

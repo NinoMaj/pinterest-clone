@@ -66,8 +66,6 @@ const Gallery = ({ projects, page }: Props) => {
   )
 }
 
-// export default Gallery
-
 const mapStateToProps = state => ({
   projects: state.projects.projects,
 })
