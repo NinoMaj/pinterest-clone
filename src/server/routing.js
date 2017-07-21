@@ -10,7 +10,7 @@ import {
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
-  SETTINGS_PAGE_ROUTE,
+  PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
   AUTH_TWITTER,
   AUTH_TWITTER_CALLBACK,
@@ -59,7 +59,7 @@ export default (app: Object, passport: Object) => {
     res.send(renderApp(req.url, req, myProjectsPage()))
   })
 
-  app.get(SETTINGS_PAGE_ROUTE, isLoggedIn, (req, res) => {
+  app.get(PROFILE_PAGE_ROUTE, isLoggedIn, (req, res) => {
     res.send(renderApp(req.url, req, settingsePage()))
   })
 
@@ -101,7 +101,7 @@ export default (app: Object, passport: Object) => {
     user[service].token = undefined
     user.save((err) => {
       if (err) throw err
-      res.redirect(SETTINGS_PAGE_ROUTE)
+      res.redirect(PROFILE_PAGE_ROUTE)
     })
   })
 

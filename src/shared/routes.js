@@ -2,7 +2,7 @@
 
 export const HOME_PAGE_ROUTE = '/'
 export const MY_PROJECTS_ROUTE = '/my-projects'
-export const SETTINGS_PAGE_ROUTE = '/settings'
+export const PROFILE_PAGE_ROUTE = '/profile'
 export const LOGOUT_PAGE_ROUTE = '/logout'
 
 export const AUTH_TWITTER = '/auth/twitter'
