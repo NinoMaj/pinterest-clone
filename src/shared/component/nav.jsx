@@ -8,7 +8,7 @@ import { APP_NAME } from '../config'
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
-  SETTINGS_PAGE_ROUTE,
+  PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from '../routes'
 
@@ -28,7 +28,7 @@ const Nav = ({ user }: Props) => {
       label: 'My projects',
     },
     {
-      route: SETTINGS_PAGE_ROUTE,
+      route: PROFILE_PAGE_ROUTE,
       icon: <i className="fa fa-user-o fa-lg" title="Profile" />,
       label: ' Profile',
     },
