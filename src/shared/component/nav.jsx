@@ -3,7 +3,6 @@
 import $ from 'jquery'
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { APP_NAME } from '../config'
 import {
@@ -18,68 +17,59 @@ const handleNavLinkClick = () => {
   $('.js-navbar-collapse').collapse('hide')
 }
 
-const Icon = styled.i`
-  font-size: 1.5em;
-`
-
-const Button = styled.button`
-  cursor: pointer;
-`
-
 type Props = {
   user: boolean,
 }
 
 const Nav = ({ user }: Props) => {
-  const leftNav = user ?
-  [
-    { route: HOME_PAGE_ROUTE, label: 'Home' },
-    { route: MY_PROJECTS_ROUTE, label: 'My projects' },
-  ]
-  :
-  [
-    { route: HOME_PAGE_ROUTE, label: 'Home' },
+  const leftNavLinks = [ // Objects with the info navbar left links
+    {
+      route: MY_PROJECTS_ROUTE,
+      label: 'My projects',
+    },
+    {
+      route: SETTINGS_PAGE_ROUTE,
+      icon: <i className="fa fa-user-o fa-lg" title="Profile" />,
+      label: ' Profile',
+    },
+    {
+      route: LOGOUT_PAGE_ROUTE,
+      icon: <i className="fa fa-power-off fa-lg" title="Logout" />,
+      label: ' Logout',
+    },
   ]
 
+  const userNav = user ? // If user is logged in display nabvar left links
+    (leftNavLinks.map(link => (
+      <li className="nav-item" key={link.route}>
+        <NavLink
+          to={link.route}
+          className="nav-link"
+          activeStyle={{ color: 'white' }}
+          exact
+          onClick={handleNavLinkClick}
+        >{link.icon}{link.label}
+        </NavLink>
+      </li>
+    )))
+    : // Otherwise display Sign in button
+    (<button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+      Sign in
+    </button>)
+
   return (
-    <nav className="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <nav className="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-inverse">
+
       <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
         <span className="navbar-toggler-icon" />
       </button>
+
       <Link to={HOME_PAGE_ROUTE} className="navbar-brand">{APP_NAME}</Link>
+
       <div className="js-navbar-collapse collapse navbar-collapse">
-
-        <ul className="navbar-nav mr-auto">
-          {[
-            ...leftNav,
-          ]
-          .map(link => (
-            <li className="nav-item" key={link.route}>
-              <NavLink to={link.route} className="nav-link" activeStyle={{ color: 'white' }} exact onClick={handleNavLinkClick}>{link.label}</NavLink>
-            </li>
-          ))}
+        <ul className="navbar-nav ml-auto">
+          {userNav}
         </ul>
-
-        {user ? (
-          <ul className="navbar-nav ml-auto">
-            {[
-              { route: SETTINGS_PAGE_ROUTE, label: <Icon className="fa fa-cog" title="Settings" /> },
-              { route: LOGOUT_PAGE_ROUTE, label: <Icon className="fa fa-power-off" title="Logout" /> },
-            ].map(link => (
-              <li className="nav-item" key={link.route}>
-                <NavLink to={link.route} className="nav-link" activeStyle={{ color: 'white' }} exact onClick={handleNavLinkClick}>{link.label}</NavLink>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <ul className="navbar-nav ml-auto">
-            <Button type="button" className="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-              Sign in
-            </Button>
-          </ul>
-          )}
-
-        
       </div>
     </nav>
   )
