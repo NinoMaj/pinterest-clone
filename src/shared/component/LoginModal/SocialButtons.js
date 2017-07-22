@@ -24,6 +24,10 @@ const Button = styled.a`
   color: #fff;
   display: block;
   margin: 3px 0;
+
+  &:hover {
+    color: black;
+  }
 `
 
 const SocialButtons = () => (

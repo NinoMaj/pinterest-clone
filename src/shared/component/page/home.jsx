@@ -7,8 +7,6 @@ import { APP_NAME } from '../../config'
 import { HOME_PAGE_ROUTE } from '../../routes'
 import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../../container/gallery'
-import Modal from '../modal'
-import AddProjectModal from '../add-project-modal'
 
 const HomePage = () => (
   <div className="mt-4">
@@ -20,11 +18,7 @@ const HomePage = () => (
       ]}
     />
     <LoginModal />
-    <Gallery page={HOME_PAGE_ROUTE} />
-    <Modal>
-      <AddProjectModal />
-    </Modal>
-    
+    <Gallery page={HOME_PAGE_ROUTE} />    
   </div>
 )
 

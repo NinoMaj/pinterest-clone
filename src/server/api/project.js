@@ -54,4 +54,21 @@ router.post('/add-project', (req, res) => {
   })
 })
 
+router.delete('/delete-project/:projectToDelete', (req, res) => {
+  const promise = Project.findOne({ _id: req.params.projectToDelete }).exec()
+
+  promise.then((project) => {
+    project.remove()
+    res.status(200).send(project)
+  })
+    .catch((err) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.log('error in delete project API:', err)
+        return res.status(500).send('Error while deleting project:', err)
+      }
+      return res.json()
+    })
+})
+
 module.exports = router

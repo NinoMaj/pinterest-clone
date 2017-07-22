@@ -4,7 +4,7 @@ import {
   PROJECT_REQUEST,
   ADD_PROJECT_SUCCESS,
   GET_PROJECTS_SUCCESS,
-  // DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_SUCCESS,
   PROJECT_FAILURE,
 } from '../actions/projectActions'
 
@@ -28,11 +28,11 @@ const projectsReducer = (
       })
     case GET_PROJECTS_SUCCESS:
       return Object.assign({}, state, { projects: action.payload, loading: false })
-    // case DELETE_PROJECT_SUCCESS:
-    //   return Object.assign({}, state, {
-    //     titles: state.titles.filter(project => project._id !== action.payload),
-    //     loading: false,
-    //   })
+    case DELETE_PROJECT_SUCCESS:
+      return Object.assign({}, state, {
+        projects: state.projects.filter(project => project._id !== action.payload),
+        loading: false,
+      })
     case PROJECT_FAILURE:
       return Object.assign({}, state, { error: action.payload, loading: false })
     default:

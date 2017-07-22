@@ -5,7 +5,7 @@ import 'isomorphic-fetch'
 import {
   ADD_PROJECT_ROUTE,
   GET_PROJECTS_ROUTE,
-  // DELETE_PROJECT_ROUTE,
+  DELETE_PROJECT_ROUTE,
 } from '../../shared/routes'
 
 export const PROJECT_REQUEST = 'PROJECT_REQUEST'
@@ -98,24 +98,24 @@ export const getProjects = () => (dispatch: Function) => {
     })
 }
 
-// export const deleteProject = (projectToDelete: string) => (dispatch: Function) => {
-//   dispatch(projectRequest())
-//   return fetch(`${DELETE_PROJECTS_ROUTE}/${projectToDelete}`, { method: 'DELETE' })
-//     .then((res) => {
-//       if (!res.ok) throw Error(res.statusText)
-//       return res.json()
-//     })
-//     .then((projectDeleted) => {
-//       if (!projectDeleted) throw Error('No project deleted.')
-//       // eslint-disable-next-line
-//       dispatch(deleteProjectSuccess(projectDeleted._id))
-//     })
-//     .catch((err) => {
-//       if (err) {
-//         // eslint-disable-next-line no-console
-//         console.error(err)
-//         dispatch(projectFailure(err))
-//       }
-//       return true
-//     })
-// }
+export const deleteProject = (projectToDelete: string) => (dispatch: Function) => {
+  dispatch(projectRequest())
+  return fetch(DELETE_PROJECT_ROUTE(projectToDelete), { method: 'DELETE' })
+    .then((res) => {
+      if (!res.ok) throw Error(res.statusText)
+      return res.json()
+    })
+    .then((projectDeleted) => {
+      if (!projectDeleted) throw Error('No project deleted.')
+      // eslint-disable-next-line
+      dispatch(deleteProjectSuccess(projectDeleted._id))
+    })
+    .catch((err) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.error(err)
+        dispatch(projectFailure(err))
+      }
+      return true
+    })
+}

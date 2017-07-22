@@ -18,14 +18,18 @@ type Props = {
   author: string,
   title: string,
   description: string,
-  imgUrl: string
+  imgUrl: string,
+  page: string,
+  onClickProp: func,
 }
 
-const Item = ({ author, title, description, imgUrl }: Props) => (
+const Item = ({ author, title, description, imgUrl, page, onClickProp }: Props) => (
   <ItemContainer className="grid-item" >
     <ItemImage
       source={imgUrl}
       height={`${((description.length % 10) * 10) + 250}px`}
+      page={page}
+      onClickProp={onClickProp}
     />
     <ItemInfo
       author={author}
