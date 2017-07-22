@@ -43,8 +43,6 @@ router.post('/add-project', (req, res) => {
   const promise = project.save()
 
   promise.then((doc) => {
-    // eslint-disable-next-line no-console
-    console.log('Project saved', doc)
     res.status(201).send(doc)
   })
   .catch((err) => {
@@ -52,6 +50,23 @@ router.post('/add-project', (req, res) => {
     console.log('Error in saving project API:', err)
     res.status(500).send(err)
   })
+})
+
+router.put('/pin-project/:projectToPin/:user', (req, res) => {
+  const promise = Project.findOne({ _id: req.params.projectToPin }).exec()
+
+  promise.then((project) => {
+    project.pinnedBy.addToSet(req.params.user)
+    res.status(200).send(project)
+  })
+    .catch((err) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.log('error in pin project API:', err)
+        return res.status(500).send('Error while pinning project:', err)
+      }
+      return res.json()
+    })
 })
 
 router.delete('/delete-project/:projectToDelete', (req, res) => {

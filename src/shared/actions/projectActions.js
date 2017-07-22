@@ -5,12 +5,14 @@ import 'isomorphic-fetch'
 import {
   ADD_PROJECT_ROUTE,
   GET_PROJECTS_ROUTE,
+  PIN_PROJECT_ROUTE,
   DELETE_PROJECT_ROUTE,
 } from '../../shared/routes'
 
 export const PROJECT_REQUEST = 'PROJECT_REQUEST'
 export const ADD_PROJECT_SUCCESS = 'ADD_PROJECT_SUCCESS'
 export const GET_PROJECTS_SUCCESS = 'GET_PROJECTS_SUCCESS'
+export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS'
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'
 export const PROJECT_FAILURE = 'PROJECT_FAILURE'
 
@@ -21,6 +23,9 @@ export const addProjectSuccess = (projectAdded: any) =>
 
 export const getProjectsSuccess = (projects: any) =>
   ({ type: GET_PROJECTS_SUCCESS, payload: projects })
+
+export const updateProjectSuccess = (project: any) =>
+  ({ type: UPDATE_PROJECT_SUCCESS, payload: project })
 
 export const deleteProjectSuccess = (projectId: number) =>
   ({ type: DELETE_PROJECT_SUCCESS, payload: projectId })
@@ -90,6 +95,24 @@ export const getProjects = () => (dispatch: Function) => {
     .then((projects) => {
       if (!projects) throw Error('No projects received.')
       dispatch(getProjectsSuccess(projects))
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error('Get projects error', JSON.stringify(err))
+      dispatch(projectFailure(err))
+    })
+}
+
+export const pinProject = (projectToPin: string, pinnedBy: string) => (dispatch: Function) => {
+  dispatch(projectRequest())
+  return fetch(PIN_PROJECT_ROUTE(projectToPin, pinnedBy), { method: 'PUT' })
+    .then((res) => {
+      if (!res.ok) throw Error(res.statusText)
+      return res.json()
+    })
+    .then((pinnedProject) => {
+      if (!pinnedProject) throw Error('No projects received.')
+      dispatch(updateProjectSuccess(pinnedProject))
     })
     .catch((err) => {
       // eslint-disable-next-line no-console

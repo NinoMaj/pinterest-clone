@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE } from '../routes'
 import Item from '../component/item'
 import AddProject from '../component/add-project-button'
-import { deleteProject } from '../actions/projectActions'
+import { deleteProject, pinProject } from '../actions/projectActions'
 
 const Container = styled.div`
   margin: 0 auto;
@@ -21,12 +21,17 @@ const Container = styled.div`
 type Props = {
   projects: any[],
   page: string,
-  deleteProjectAction: func,
+  deleteProjectAction: Function,
+  pinProjectAction: Function,
 }
 
-const Gallery = ({ projects, page, deleteProjectAction }: Props) => {
-  const handleOnClickProp = (projectId: string) => {
+const Gallery = ({ projects, page, deleteProjectAction, pinProjectAction }: Props) => {
+  const handleDeletingProject = (projectId: string) => {
     deleteProjectAction(projectId)
+  }
+
+  const handlePinningProject = (projectId: string) => {
+    pinProjectAction(projectId, 'user')
   }
   let childElements = null
   if (projects.length > 0) {
@@ -39,7 +44,7 @@ const Gallery = ({ projects, page, deleteProjectAction }: Props) => {
           description={myProject.description}
           imgUrl={myProject.imgUrl}
           page={page}
-          onClickProp={() => handleOnClickProp(myProject._id)}
+          onClickProp={() => handleDeletingProject(myProject._id)}
         />
       ))
     } else if (page === HOME_PAGE_ROUTE) {
@@ -51,7 +56,7 @@ const Gallery = ({ projects, page, deleteProjectAction }: Props) => {
           description={project.description}
           imgUrl={project.imgUrl}
           page={page}
-          onClickProp={() => handleOnClickProp(project._id)}
+          onClickProp={() => handlePinningProject(project._id)}
         />
       ))
     }
@@ -83,6 +88,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deleteProjectAction: projectId => dispatch(deleteProject(projectId)),
+  pinProjectAction: (projectId, user) => dispatch(pinProject(projectId, user)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery)

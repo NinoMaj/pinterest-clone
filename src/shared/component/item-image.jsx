@@ -66,7 +66,7 @@ type Props = {
   source: string,
   height: string,
   page: string,
-  onClickProp: func,
+  onClickProp: Function,
 }
 
 const ItemImage = ({ source, height, page, onClickProp }: Props) => (
