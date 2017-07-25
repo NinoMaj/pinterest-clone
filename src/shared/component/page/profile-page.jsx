@@ -3,9 +3,11 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 
+import Profile from '../../container/profile'
+
 const title = 'Profile'
 
-const ProfilePage = ({ email, username, fullName, country, state, city }) =>
+const ProfilePage = () =>
   (
     <div className="container mt-4">
       <Helmet
@@ -17,16 +19,7 @@ const ProfilePage = ({ email, username, fullName, country, state, city }) =>
       />
       <div className="row">
         <div className="col-12">
-          <div>
-            <div>This will be user image/avatar</div>
-            <div>{username}</div>
-          </div>
-          <div>
-            <div>Full Name: {fullName}</div>
-            <div>Email: {email}</div>
-            <div>Location: {country}</div>
-            <div>City/State: {city}, {state}</div>
-          </div>
+          <Profile />
         </div>
       </div>
     </div>

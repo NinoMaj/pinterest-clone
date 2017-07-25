@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   country: String,
   city: String,
   state: String,
-  dateCreated: Date,
+  dateCreated: { type: Date, default: Date.now },
   twitter: {
     id: String,
     token: String,
