@@ -3,15 +3,18 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { connect } from 'react-redux'
+import { logoutUser } from '../../actions/userActions'
 
 const title = 'Logout'
 
 type Props = {
   history: Object,
+  logoutAction: Function,
 }
 
-const LogoutPage = ({ history }: Props) => {
+const LogoutPage = ({ history, logoutAction }: Props) => {
   setTimeout(() => {
+    logoutAction()
     history.push('/')
   }, 2000)
   return (<div className="container mt-4">
@@ -30,4 +33,8 @@ const LogoutPage = ({ history }: Props) => {
   </div>)
 }
 
-export default LogoutPage
+const mapDispatchToProps = dispatch => ({
+  logoutAction: () => dispatch(logoutUser()),
+})
+
+export default connect(null, mapDispatchToProps)(LogoutPage)
