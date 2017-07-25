@@ -16,6 +16,10 @@ const addUserToDB = (action, service, req, token, profile, done) => {
   user[service].displayName = profile.displayName // saves displayName and username
   user[service].username = profile.username
 
+  if (!user.userName) { // Sets userName in User profile
+    user.userName = profile.username
+  }
+
   // save our user to the database
   user.save((err) => {
     if (err) throw err
