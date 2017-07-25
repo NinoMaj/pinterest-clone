@@ -29,13 +29,13 @@ const Container = styled.div`
 `
 
 type Props = {
-  user: boolean,
+  user: object,
 }
 
 const App = ({ user }: Props) => (
   <Container>
     <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
-    <Nav user={user} />
+    <Nav user={user.logged} />
     <Switch>
       <Route
         exact
@@ -48,7 +48,7 @@ const App = ({ user }: Props) => (
       />
       <Route
         path={PROFILE_PAGE_ROUTE}
-        render={history => <ProfilePage history={history.history} />}
+        render={history => <ProfilePage user={user} history={history.history} />}
       />
       <Route
         path={LOGOUT_PAGE_ROUTE}
@@ -60,7 +60,7 @@ const App = ({ user }: Props) => (
 )
 
 const mapStateToProps = state => ({
-  user: state.user.logged,
+  user: state.user,
 })
 
 export default connect(mapStateToProps)(App)
