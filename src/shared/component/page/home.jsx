@@ -18,7 +18,7 @@ const HomePage = () => (
       ]}
     />
     <LoginModal />
-    <Gallery page={HOME_PAGE_ROUTE} />    
+    <Gallery page={HOME_PAGE_ROUTE} />
   </div>
 )
 

@@ -1,6 +1,13 @@
+// @flow
+
 import React from 'react'
 
-const ModalMain = ({ id, children }) => (
+type Props = {
+  id: string,
+  children: any,
+}
+
+const ModalMain = ({ id, children }: Props) => (
   <div className="modal fade mt-5" id={id} role="dialog" aria-hidden="true">
     <div className="modal-dialog" role="document">
       <div className="modal-content">

@@ -2,6 +2,7 @@ import * as types from './actionsTypes'
 
 export const loginUser = () => ({ type: types.LOGIN_USER })
 export const logoutUser = () => ({ type: types.LOGOUT_USER })
+export const loadId = id => ({ type: types.LOAD_ID, id })
 export const updateEmail = email => ({ type: types.UPDATE_EMAIL, email })
 export const updateUsername = username => ({ type: types.UPDATE_USERNAME, username })
 export const updateFullname = fullname => ({ type: types.UPDATE_FULLNAME, fullname })
