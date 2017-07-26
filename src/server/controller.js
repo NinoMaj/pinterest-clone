@@ -3,7 +3,11 @@
 export const homePage = (user: Object, projectsInitialState: Object) =>
   user ?
   {
-    user: { logged: true },
+    user: {
+      logged: true,
+      id: user._id,
+      userName: user.userName,
+    },
     projects: {
       projects: projectsInitialState,
     },

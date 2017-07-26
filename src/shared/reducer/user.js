@@ -4,6 +4,7 @@ import * as types from '../actions/actionsTypes'
 
 const initialState = {
   logged: false,
+  id: '',
   email: '',
   userName: '',
   fullName: '',
@@ -20,6 +21,9 @@ const userReducer = (state = initialState, action) => {
 
     case types.LOGOUT_USER:
       return Object.assign({}, state, { logged: false })
+
+    case types.LOAD_ID:
+      return Object.assign({}, state, { id: action.id })
 
     case types.UPDATE_EMAIL:
       return Object.assign({}, state, { email: action.email })
