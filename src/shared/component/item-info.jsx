@@ -36,18 +36,18 @@ const AuthorName = styled.span`
 
 type Props = {
   description: string,
-  pinsCount: number,
+  pinCount: number,
   author: string,
 }
 
-const ItemInfo = ({ author, description, pinsCount }: Props) => (
+const ItemInfo = ({ author, description, pinCount }: Props) => (
   <div>
     <DescriptionAndPinCount>
       <Description>
         {description}
       </Description>
       <PinCount>
-        <i className="fa fa-thumb-tack" aria-hidden="true" /> {pinsCount}
+        <i className="fa fa-thumb-tack" aria-hidden="true" /> {pinCount}
       </PinCount>
     </DescriptionAndPinCount>
     <Author>

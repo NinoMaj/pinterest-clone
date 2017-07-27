@@ -21,17 +21,26 @@ const Container = styled.div`
 type Props = {
   projects: any[],
   page: string,
+  userId: string,
+  isLogged: boolean,
   deleteProjectAction: Function,
   pinProjectAction: Function,
 }
 
-const Gallery = ({ projects, page, deleteProjectAction, pinProjectAction }: Props) => {
+const Gallery = ({
+  projects,
+  page,
+  userId,
+  isLogged,
+  deleteProjectAction,
+  pinProjectAction,
+}: Props) => {
   const handleDeletingProject = (projectId: string) => {
     deleteProjectAction(projectId)
   }
 
   const handlePinningProject = (projectId: string) => {
-    pinProjectAction(projectId, 'user')
+    pinProjectAction(projectId, userId)
   }
   let childElements = null
   if (projects.length > 0) {
@@ -43,6 +52,7 @@ const Gallery = ({ projects, page, deleteProjectAction, pinProjectAction }: Prop
           title={myProject.title}
           description={myProject.description}
           imgUrl={myProject.imgUrl}
+          pinCount={myProject.pinnedBy.length}
           page={page}
           onClickProp={() => handleDeletingProject(myProject._id)}
         />
@@ -55,7 +65,9 @@ const Gallery = ({ projects, page, deleteProjectAction, pinProjectAction }: Prop
           title={project.title}
           description={project.description}
           imgUrl={project.imgUrl}
+          pinCount={project.pinnedBy.length}
           page={page}
+          isLogged={isLogged}
           onClickProp={() => handlePinningProject(project._id)}
         />
       ))
@@ -84,6 +96,8 @@ const Gallery = ({ projects, page, deleteProjectAction, pinProjectAction }: Prop
 
 const mapStateToProps = state => ({
   projects: state.projects.projects,
+  userId: state.user.id,
+  isLogged: state.user.logged,
 })
 
 const mapDispatchToProps = dispatch => ({

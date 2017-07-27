@@ -3,6 +3,7 @@
 import $ from 'jquery'
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { APP_NAME } from '../config'
 import {
@@ -16,6 +17,10 @@ const handleNavLinkClick = () => {
   $('body').scrollTop(0)
   $('.js-navbar-collapse').collapse('hide')
 }
+
+const Button = styled.button`
+    cursor: pointer;
+`
 
 type Props = {
   user: boolean,
@@ -53,9 +58,9 @@ const Nav = ({ user }: Props) => {
       </li>
     )))
     : // Otherwise display Sign in button
-    (<button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
+    (<Button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#loginModal">
       Sign in
-    </button>)
+    </Button>)
 
   return (
     <nav className="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-inverse">
