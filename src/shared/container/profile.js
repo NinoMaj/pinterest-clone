@@ -20,31 +20,37 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: 'Enter your email adress...',
-      username: 'TestName',
-      fullname: 'Enter your full name...',
-      country: 'Enter your country...',
-      state: 'The state where you live...',
-      city: 'Your city...',
+      email: this.props.email,
+      username: this.props.username,
+      fullname: this.props.fullname,
+      country: this.props.country,
+      city: this.props.city,
+      state: this.props.state,
     }
   }
 
-  updateAllStateFields() {
-    this.props.updateEmail(this.state.email)
-    this.props.updateUsername(this.state.username)
-    this.props.updateFullname(this.state.fullname)
-    this.props.updateCountry(this.state.country)
-    this.props.updateCity(this.state.city)
-    this.props.updateState(this.state.state)
+  didFieldChanged(field) {
+    return this.props[field] !== this.state[field]
   }
 
-  infoInput(text, field) {
+  updateAllStateFields() {
+    if (this.didFieldChanged('email')) this.props.updateEmail(this.state.email)
+    if (this.didFieldChanged('username')) this.props.updateUsername(this.state.username)
+    if (this.didFieldChanged('fullname')) this.props.updateFullname(this.state.fullname)
+    if (this.didFieldChanged('country')) this.props.updateCountry(this.state.country)
+    if (this.didFieldChanged('city')) this.props.updateCity(this.state.city)
+    if (this.didFieldChanged('state')) this.props.updateState(this.state.state)
+  }
+
+  infoInput(text, placeholder, field) {
     return (
       <div>{text}
         <Input
           className={`input-${field}`}
           type="text"
-          placeholder={this.state[field]}
+          autocomplete="on"
+          placeholder={placeholder}
+          defaultValue={this.props[field] ? this.props[field] : ''}
           onChange={event => this.setState({ [field]: event.target.value })}
         />
       </div>
@@ -54,15 +60,17 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        {this.infoInput('Username:', 'username')}
-        {this.infoInput('Full name:', 'fullname')}
-        {this.infoInput('Email adress:', 'email')}
-        {this.infoInput('Location:', 'country')}
-        {this.infoInput('City:', 'city')}
-        {this.infoInput('State:', 'state')}
+        {this.infoInput('Username:', 'Enter your Username', 'username')}
+        {this.infoInput('Full name:', 'Enter your full name', 'fullname')}
+        {this.infoInput('Email adress:', 'Enter your email adress', 'email')}
+        {this.infoInput('Location:', 'Enter your country', 'country')}
+        {this.infoInput('City:', 'Enter your city', 'city')}
+        {this.infoInput('State:', 'The state where you live', 'state')}
 
         <button
           className="btn btn-primary btn-lg"
+          data-dismiss="modal"
+          aria-label="Close"
           onClick={() => this.updateAllStateFields()}
         >Save Changes
         </button>
@@ -70,6 +78,17 @@ class Profile extends Component {
       </div>
 
     )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    email: state.user.email,
+    username: state.user.userName,
+    fullname: state.user.fullName,
+    country: state.user.country,
+    city: state.user.city,
+    state: state.user.state,
   }
 }
 
@@ -84,9 +103,4 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     }
-// }
-
-export default connect(null, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
