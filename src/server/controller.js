@@ -7,6 +7,11 @@ export const homePage = (user: Object, projectsInitialState: Object) =>
       logged: true,
       id: user._id,
       userName: user.userName,
+      fullName: user.fullName,
+      email: user.email,
+      country: user.country,
+      city: user.city,
+      state: user.state,
     },
     projects: {
       projects: projectsInitialState,

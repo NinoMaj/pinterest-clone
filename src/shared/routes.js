@@ -16,3 +16,5 @@ export const ADD_PROJECT_ROUTE = '/api/projects/add-project'
 export const GET_PROJECTS_ROUTE = '/api/projects/get-projects'
 export const PIN_PROJECT_ROUTE = (project: string, user: string) => `/api/projects/pin-project/${project}/${user}`
 export const DELETE_PROJECT_ROUTE = (project: string) => `/api/projects/delete-project/${project}`
+
+export const ADD_PROFILE_ROUTE = 'api/profile/add-profile'

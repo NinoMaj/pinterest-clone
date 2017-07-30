@@ -23,6 +23,7 @@ import {
 import Project from './models/project'
 
 import projects from './api/project'
+import profile from './api/profile'
 
 import renderApp from './render-app'
 
@@ -106,6 +107,8 @@ export default (app: Object, passport: Object) => {
   })
 
   app.use('/api/projects', projects)
+
+  app.use('/api/profile', profile)
 
   app.get('/500', () => {
     throw Error('Fake Internal Server Error')

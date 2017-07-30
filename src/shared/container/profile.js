@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
+import { ADD_PROFILE_ROUTE } from '../routes'
 import {
   updateEmail,
   updateUsername,
@@ -57,6 +58,33 @@ class Profile extends Component {
     )
   }
 
+  submitProfile() {
+    fetch(ADD_PROFILE_ROUTE, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state),
+    })
+    .then((res) => {
+      if (!res.ok) throw Error(res.statusText)
+      return res.json()
+    })
+    // .then((profileSaved) => {
+    //   if (!profileSaved) throw Error('Profile not saved.')
+    //   dispatch(addProfileSuccess(profileSaved))
+    // })
+    .catch((err) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.log('Add profile error', JSON.stringify(err))
+      }
+    })
+  }
+
+  handleProfileUpdate() {
+    this.updateAllStateFields()
+    this.submitProfile()
+  }
+
   render() {
     return (
       <div>
@@ -71,7 +99,7 @@ class Profile extends Component {
           className="btn btn-primary btn-lg"
           data-dismiss="modal"
           aria-label="Close"
-          onClick={() => this.updateAllStateFields()}
+          onClick={() => this.handleProfileUpdate()}
         >Save Changes
         </button>
 
