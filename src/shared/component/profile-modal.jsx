@@ -1,6 +1,6 @@
 import React from 'react'
-import ModalMain from './modal-main'
 
+import ModalMain from './modal-main'
 import Profile from '../container/profile'
 
 const ProfileModal = () => (
