@@ -96,12 +96,12 @@ class Profile extends Component {
         </h4>
 
         <div>
-          {this.infoInput('Username:', 'Enter your Username', 'username')}
-          {this.infoInput('Full name:', 'Enter your full name', 'fullname')}
-          {this.infoInput('Email adress:', 'Enter your email adress', 'email')}
-          {this.infoInput('Location:', 'Enter your country', 'country')}
-          {this.infoInput('City:', 'Enter your city', 'city')}
-          {this.infoInput('State:', 'The state where you live', 'state')}
+          {this.infoInput('Username:', 'John', 'username')}
+          {this.infoInput('Full name:', 'John Doe', 'fullname')}
+          {this.infoInput('Email adress:', 'user@gmail.com', 'email')}
+          {this.infoInput('Location:', 'Location', 'country')}
+          {this.infoInput('City:', 'Los Angeles', 'city')}
+          {this.infoInput('State:', 'California', 'state')}
 
           <button
             className="btn btn-primary btn-block"
