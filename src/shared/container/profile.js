@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import styled from 'styled-components'
 
 import { ADD_PROFILE_ROUTE } from '../routes'
 import {
@@ -13,10 +12,6 @@ import {
   updateState,
 } from '../actions/userActions'
 
-const Input = styled.input`
-  margin: 5px 10px;
-`
-
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -27,6 +22,7 @@ class Profile extends Component {
       country: this.props.country,
       city: this.props.city,
       state: this.props.state,
+      // displaySuccess: false,
     }
   }
 
@@ -45,15 +41,18 @@ class Profile extends Component {
 
   infoInput(text, placeholder, field) {
     return (
-      <div>{text}
-        <Input
-          className={`input-${field}`}
-          type="text"
-          autocomplete="on"
-          placeholder={placeholder}
-          defaultValue={this.props[field] ? this.props[field] : ''}
-          onChange={event => this.setState({ [field]: event.target.value })}
-        />
+      <div className={`form-group row input-${field}`}>
+        <label htmlFor="text-input" className="col-3 col-form-label">{text}</label>
+        <div className="col-9">
+          <input
+            className="form-control"
+            type="text"
+            autoComplete="on"
+            placeholder={placeholder}
+            defaultValue={this.props[field] ? this.props[field] : ''}
+            onChange={event => this.setState({ [field]: event.target.value })}
+          />
+        </div>
       </div>
     )
   }
@@ -83,28 +82,36 @@ class Profile extends Component {
   handleProfileUpdate() {
     this.updateAllStateFields()
     this.submitProfile()
+    // this.setState({ displaySuccess: true })
+    // setTimeout(() => this.setState({ displaySuccess: false }, 3000))
   }
 
   render() {
     return (
       <div>
-        {this.infoInput('Username:', 'Enter your Username', 'username')}
-        {this.infoInput('Full name:', 'Enter your full name', 'fullname')}
-        {this.infoInput('Email adress:', 'Enter your email adress', 'email')}
-        {this.infoInput('Location:', 'Enter your country', 'country')}
-        {this.infoInput('City:', 'Enter your city', 'city')}
-        {this.infoInput('State:', 'The state where you live', 'state')}
+        <h4
+          className="mb-4"
+          style={{ textAlign: 'center' }}
+        >Complete your profile details:
+        </h4>
 
-        <button
-          className="btn btn-primary btn-lg"
-          data-dismiss="modal"
-          aria-label="Close"
-          onClick={() => this.handleProfileUpdate()}
-        >Save Changes
-        </button>
+        <div>
+          {this.infoInput('Username:', 'Enter your Username', 'username')}
+          {this.infoInput('Full name:', 'Enter your full name', 'fullname')}
+          {this.infoInput('Email adress:', 'Enter your email adress', 'email')}
+          {this.infoInput('Location:', 'Enter your country', 'country')}
+          {this.infoInput('City:', 'Enter your city', 'city')}
+          {this.infoInput('State:', 'The state where you live', 'state')}
 
+          <button
+            className="btn btn-primary btn-block"
+            data-dismiss="modal"
+            aria-label="Close"
+            onClick={() => this.handleProfileUpdate()}
+          >Save Changes
+          </button>
+        </div>
       </div>
-
     )
   }
 }

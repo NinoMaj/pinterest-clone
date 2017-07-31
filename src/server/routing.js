@@ -3,7 +3,7 @@
 import {
   homePage,
   myProjectsPage,
-  settingsePage,
+  profilePage,
   logoutPage,
 } from './controller'
 
@@ -61,7 +61,7 @@ export default (app: Object, passport: Object) => {
   })
 
   app.get(PROFILE_PAGE_ROUTE, isLoggedIn, (req, res) => {
-    res.send(renderApp(req.url, req, settingsePage()))
+    res.send(renderApp(req.url, req, profilePage(req.user)))
   })
 
   app.get(LOGOUT_PAGE_ROUTE, isLoggedIn, (req, res) => {
