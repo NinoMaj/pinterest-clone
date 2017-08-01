@@ -6,6 +6,8 @@ import GitHubStrategy from 'passport-github2'
 import User from '../models/user'
 import configAuth from './auth'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 // Function to add a new user to DB. The 2 possible cases are decided by [action]
 // parameter: New user/account ('new') or link new account to existing user ('link').
 // [service] is the social service used: 'twitter', 'google', 'github'
@@ -86,7 +88,7 @@ module.exports = (passport) => {
   passport.use(new TwitterStrategy({
     // pull in our app id from auth.js file and secret from .env file.
     consumerKey: configAuth.twitterAuth.consumerKey,
-    consumerSecret: process.env.TWITTER_SECRET,
+    consumerSecret: isProduction ? process.env.TWITTER_SECRET : process.env.TWITTER_SECRET_DEV,
     callbackURL: configAuth.twitterAuth.callbackURL,
     passReqToCallback: true,
   },
@@ -106,7 +108,7 @@ module.exports = (passport) => {
 
   passport.use(new GitHubStrategy({
     clientID: configAuth.githubAuth.clientID,
-    clientSecret: process.env.GITHUB_SECRET,
+    clientSecret: isProduction ? process.env.GITHUB_SECRET : process.env.GITHUB_SECRET_DEV,
     callbackURL: configAuth.githubAuth.callbackURL,
     passReqToCallback: true,
   },
