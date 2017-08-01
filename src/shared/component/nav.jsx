@@ -31,6 +31,7 @@ const Nav = ({ user }: Props) => {
     {
       route: MY_PROJECTS_ROUTE,
       label: 'My projects',
+      icon: <span />,
     },
     {
       route: PROFILE_PAGE_ROUTE,
