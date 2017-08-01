@@ -7,8 +7,8 @@ import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
 let storeTemp = {}
-const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 if (typeof (window) !== 'undefined') {
+  const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
   const preloadedState = window.__PRELOADED_STATE__
 
   /* eslint-enable no-underscore-dangle */
@@ -29,7 +29,7 @@ if (typeof (window) !== 'undefined') {
       user: userReducer,
       projects: projectsReducer,
     }),
-    composeEnhancers(applyMiddleware(thunkMiddleware)))
+    applyMiddleware(thunkMiddleware))
 }
 
 const store = storeTemp
