@@ -19,7 +19,7 @@ const app = express()
 
 // connect to the database and load models
 if (isProd) {
-  db(process.env.MONGODB_URI)
+  db(process.env.MONGOLAB_RED_URI)
 } else {
   db(LOCAL_MONGODB_URI)
 }
