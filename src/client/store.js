@@ -29,7 +29,7 @@ if (typeof (window) !== 'undefined') {
       user: userReducer,
       projects: projectsReducer,
     }),
-    applyMiddleware(thunkMiddleware))
+    compose(applyMiddleware(thunkMiddleware)))
 }
 
 const store = storeTemp
