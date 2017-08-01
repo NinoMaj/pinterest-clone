@@ -21,7 +21,7 @@ const Container = styled.div`
 type Props = {
   projects: any[],
   page: string,
-  userId: string,
+  userId: any,
   isLogged: boolean,
   deleteProjectAction: Function,
   pinProjectAction: Function,
@@ -54,6 +54,7 @@ const Gallery = ({
           imgUrl={myProject.imgUrl}
           pinCount={myProject.pinnedBy.length}
           page={page}
+          isLogged={isLogged}
           onClickProp={() => handleDeletingProject(myProject._id)}
         />
       ))
