@@ -1,12 +1,11 @@
 /* eslint no-shadow: "off", consistent-return: "off" */
-
 import TwitterStrategy from 'passport-twitter'
 import GoogleStrategy from 'passport-google-oauth'
 import GitHubStrategy from 'passport-github2'
+
+import { isProd } from '../../shared/util'
 import User from '../models/user'
 import configAuth from './auth'
-
-const isProduction = process.env.NODE_ENV === 'production'
 
 // Function to add a new user to DB. The 2 possible cases are decided by [action]
 // parameter: New user/account ('new') or link new account to existing user ('link').
@@ -63,7 +62,7 @@ const passportCallback = (service, req, token, refreshToken, profile, done) => {
     } else {
       User.findOne({ [serviceID]: profile.id }, (err, user) => {
         if (err) return done(err)
-        if (user._id.toString() !== req.user._id.toString()) {
+        if (user && user._id.toString() !== req.user._id.toString()) {
           // eslint-disable-next-line no-console
           console.error('Error: This account is already registered with another user')
           return done(null)
@@ -88,7 +87,7 @@ module.exports = (passport) => {
   passport.use(new TwitterStrategy({
     // pull in our app id from auth.js file and secret from .env file.
     consumerKey: configAuth.twitterAuth.consumerKey,
-    consumerSecret: isProduction ? process.env.TWITTER_SECRET : process.env.TWITTER_SECRET_DEV,
+    consumerSecret: isProd ? process.env.TWITTER_SECRET : process.env.TWITTER_SECRET_DEV,
     callbackURL: configAuth.twitterAuth.callbackURL,
     passReqToCallback: true,
   },
@@ -108,7 +107,7 @@ module.exports = (passport) => {
 
   passport.use(new GitHubStrategy({
     clientID: configAuth.githubAuth.clientID,
-    clientSecret: isProduction ? process.env.GITHUB_SECRET : process.env.GITHUB_SECRET_DEV,
+    clientSecret: isProd ? process.env.GITHUB_SECRET : process.env.GITHUB_SECRET_DEV,
     callbackURL: configAuth.githubAuth.callbackURL,
     passReqToCallback: true,
   },

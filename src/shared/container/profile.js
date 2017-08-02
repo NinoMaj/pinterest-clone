@@ -16,6 +16,7 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      id: this.props.id,
       email: this.props.email,
       username: this.props.username,
       fullname: this.props.fullname,
@@ -99,7 +100,7 @@ class Profile extends Component {
           {this.infoInput('Username:', 'John', 'username')}
           {this.infoInput('Full name:', 'John Doe', 'fullname')}
           {this.infoInput('Email adress:', 'user@gmail.com', 'email')}
-          {this.infoInput('Location:', 'Location', 'country')}
+          {this.infoInput('Location:', 'United States', 'country')}
           {this.infoInput('City:', 'Los Angeles', 'city')}
           {this.infoInput('State:', 'California', 'state')}
 
@@ -118,6 +119,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
   return {
+    id: state.user.id,
     email: state.user.email,
     username: state.user.userName,
     fullname: state.user.fullName,
