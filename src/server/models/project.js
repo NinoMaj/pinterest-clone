@@ -7,7 +7,7 @@ const ProjectSchema = new mongoose.Schema({
   title: { type: String, maxlength: 160, required: true },
   description: { type: String, required: true },
   imgUrl: { type: String, required: true },
-  pinnedBy: [{ type: String }],
+  pinnedBy: [],
   dateCreated: { type: Date, default: Date.now },
 })
 
