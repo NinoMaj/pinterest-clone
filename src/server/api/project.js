@@ -56,7 +56,11 @@ router.put('/pin-project/:projectToPin/:user', (req, res) => {
   const promise = Project.findOne({ _id: req.params.projectToPin }).exec()
 
   promise.then((project) => {
+    // eslint-disable-next-line no-console
+    console.log('project.pinnedBy', project.pinnedBy)
     project.pinnedBy.addToSet(req.params.user)
+    // eslint-disable-next-line no-console
+    console.log('project.pinnedBy', project.pinnedBy)
     res.status(200).send(project)
   })
     .catch((err) => {
