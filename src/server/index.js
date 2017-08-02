@@ -24,13 +24,16 @@ if (isProd) {
   db(LOCAL_MONGODB_URI)
 }
 
-app.use(bodyParser())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser()) // read cookies (needed for auth)
 
 // required for passport
-app.use(session({ secret: process.env.PASSPORT_SECRET })) // session secret
+app.use(session({
+  secret: process.env.PASSPORT_SECRET,  // session secret
+  resave: false,
+  saveUninitialized: false,
+}))
 app.use(passport.initialize())
 app.use(passport.session()) // persistent login sessions
 

@@ -18,7 +18,7 @@ const router = express.Router()
 router.post('/add-profile', (req, res) => {
   const { id, email, username, fullname, country, city, state } = req.body
   // eslint-disable-next-line consistent-return
-  User.findOne({ id }, (err, user) => {
+  User.findOne({ _id: id }, (err, user) => {
     if (err) {
       return res.status(500).send('Error while getting user:', err)
     }

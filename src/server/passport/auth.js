@@ -1,14 +1,12 @@
-const isProduction = process.env.NODE_ENV === 'production'
-// eslint-disable-next-line no-console
-console.log(isProduction)
+import { isProd } from '../../shared/util'
 
-const callbackPath = isProduction ?
+const callbackPath = isProd ?
   'https://chingu-showcase.herokuapp.com/' :
   'http://localhost:8000/'
 
 module.exports = {
   twitterAuth: {
-    consumerKey: isProduction ? '1OfRIUy70ChhM0zwhd59oDGsO' : 'pDgW2qdfYmE7siYxboN5esjsX',
+    consumerKey: isProd ? '1OfRIUy70ChhM0zwhd59oDGsO' : 'pDgW2qdfYmE7siYxboN5esjsX',
     callbackURL: `${callbackPath}auth/twitter/callback`,
   },
 
@@ -18,7 +16,7 @@ module.exports = {
   },
 
   githubAuth: {
-    clientID: isProduction ? 'c44d960c8b1e4fa06dbf' : '268f2bef895718508c27',
+    clientID: isProd ? 'c44d960c8b1e4fa06dbf' : '268f2bef895718508c27',
     callbackURL: `${callbackPath}auth/github/callback`,
   },
 }
