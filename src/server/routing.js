@@ -57,7 +57,26 @@ export default (app: Object, passport: Object) => {
   })
 
   app.get(MY_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
-    res.send(renderApp(req.url, req, myProjectsPage()))
+    const initialStatePromise = new Promise((resolve, reject) => {
+      const promise = Project.find({}).exec()
+
+      promise.then(projectsInitialState => (
+        resolve(projectsInitialState)
+      ))
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log('Error in get projects API:', err)
+          reject(err)
+        })
+    })
+
+    initialStatePromise.then((projectsInitialState) => {
+      res.send(renderApp(req.url, req, myProjectsPage(req.user, projectsInitialState)))
+    })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('Get projects error', JSON.stringify(err))
+      })
   })
 
   app.get(PROFILE_PAGE_ROUTE, isLoggedIn, (req, res) => {

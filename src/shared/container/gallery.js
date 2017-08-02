@@ -22,6 +22,7 @@ type Props = {
   projects: any[],
   page: string,
   userId: any,
+  userName: string,
   isLogged: boolean,
   deleteProjectAction: Function,
   pinProjectAction: Function,
@@ -31,6 +32,7 @@ const Gallery = ({
   projects,
   page,
   userId,
+  userName,
   isLogged,
   deleteProjectAction,
   pinProjectAction,
@@ -45,7 +47,7 @@ const Gallery = ({
   let childElements = null
   if (projects.length > 0) {
     if (page === MY_PROJECTS_ROUTE) {
-      childElements = projects.filter(project => project.author === 'author').map(myProject => (
+      childElements = projects.filter(project => project.author === userName).map(myProject => (
         <Item
           key={myProject._id}
           author={'me'}
@@ -98,6 +100,7 @@ const Gallery = ({
 const mapStateToProps = state => ({
   projects: state.projects.projects,
   userId: state.user.id,
+  userName: state.user.userName,
   isLogged: state.user.logged,
 })
 

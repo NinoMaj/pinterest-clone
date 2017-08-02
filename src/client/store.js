@@ -7,6 +7,7 @@ import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
 let storeTemp = {}
+console.log('isProd', isProd)
 if (typeof (window) !== 'undefined') {
   const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
   const preloadedState = window.__PRELOADED_STATE__

@@ -23,7 +23,12 @@ class AddProject extends Component {
   }
 
   handleSubmit(event) {
-    this.props.addProjectAction('author', this.state.inputTitle, this.state.inputDescription, this.state.inputImgUrl)
+    this.props.addProjectAction(
+      this.props.userName,
+      this.state.inputTitle,
+      this.state.inputDescription,
+      this.state.inputImgUrl,
+    )
     this.setState({
       submitted: true,
       inputTitle: '',
@@ -79,9 +84,13 @@ class AddProject extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  userName: state.user.userName,
+})
+
 const mapDispatchToProps = dispatch => ({
   addProjectAction: (author, title, description, imgUrl) =>
     dispatch(addProject(author, title, description, imgUrl)),
 })
 
-export default connect(null, mapDispatchToProps)(AddProject)
+export default connect(mapStateToProps, mapDispatchToProps)(AddProject)
