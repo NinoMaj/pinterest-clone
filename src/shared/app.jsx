@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Switch } from 'react-router'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import Helmet from 'react-helmet'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import styled from 'styled-components'
@@ -63,4 +63,4 @@ const mapStateToProps = state => ({
   user: state.user,
 })
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))
