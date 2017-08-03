@@ -66,14 +66,15 @@ type Props = {
   source: string,
   height: string,
   isLogged: boolean,
+  isAlreadyPinned: boolean,
   page: string,
   onClickProp: Function,
 }
 
-const ItemImage = ({ source, height, isLogged, page, onClickProp }: Props) => (
+const ItemImage = ({ source, height, isLogged, isAlreadyPinned, page, onClickProp }: Props) => (
   <ImgContainer>
     <Img src={source} alt="project" height={height} />
-    {page === HOME_PAGE_ROUTE && isLogged === true &&
+    {page === HOME_PAGE_ROUTE && isLogged && !isAlreadyPinned &&
       <PinButton onClick={onClickProp}>
         <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
       </PinButton>

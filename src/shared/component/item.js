@@ -21,6 +21,7 @@ type Props = {
   imgUrl: string,
   pinCount: number,
   isLogged: boolean,
+  isAlreadyPinned: boolean,
   page: string,
   onClickProp: func,
 }
@@ -33,6 +34,7 @@ const Item = ({
   isLogged,
   page,
   pinCount,
+  isAlreadyPinned,
   onClickProp,
 }: Props) => (
   <ItemContainer className="grid-item" >
@@ -40,6 +42,7 @@ const Item = ({
       source={imgUrl}
       height={`${((description.length % 10) * 10) + 250}px`}
       isLogged={isLogged}
+      isAlreadyPinned={isAlreadyPinned}
       page={page}
       onClickProp={onClickProp}
     />

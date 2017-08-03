@@ -45,6 +45,7 @@ const Gallery = ({
     pinProjectAction(projectId, userId)
   }
   let childElements = null
+
   if (projects.length > 0) {
     if (page === MY_PROJECTS_ROUTE) {
       childElements = projects.filter(project => project.author === userName).map(myProject => (
@@ -55,6 +56,7 @@ const Gallery = ({
           description={myProject.description}
           imgUrl={myProject.imgUrl}
           pinCount={myProject.pinnedBy.length}
+          isAlreadyPinned={myProject.pinnedBy.includes(userId)}
           page={page}
           isLogged={isLogged}
           onClickProp={() => handleDeletingProject(myProject._id)}
@@ -69,6 +71,7 @@ const Gallery = ({
           description={project.description}
           imgUrl={project.imgUrl}
           pinCount={project.pinnedBy.length}
+          isAlreadyPinned={project.pinnedBy.includes(userId)}
           page={page}
           isLogged={isLogged}
           onClickProp={() => handlePinningProject(project._id)}
