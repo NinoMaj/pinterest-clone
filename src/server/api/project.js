@@ -18,7 +18,7 @@ router.get('/get-projects', (req, res) => {
   ))
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('Error in get books API:', err)
+      console.log('Error in get projects API:', err)
       return res.status(500).send('Error while getting projects:', err)
     })
 })
