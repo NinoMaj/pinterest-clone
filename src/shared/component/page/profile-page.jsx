@@ -66,7 +66,7 @@ const ProfilePage = ({ user }: Props) => (
           </div> */}
 
           <HeaderDiv>
-            <Img src="http://localhost:7000/public/images/chingu-logo.png" alt="user avatar" />
+            <Img src="/static/images/chingu-logo.png" alt="user avatar" />
             <div>{user.userName}</div>
           </HeaderDiv>
 
