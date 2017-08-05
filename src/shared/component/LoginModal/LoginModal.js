@@ -1,6 +1,6 @@
 import React from 'react'
 import ModalMain from '../modal-main'
-import SocialButtons from './SocialButtons'
+import SocialButton from './SocialButton'
 
 const style = {
   text: {
@@ -11,8 +11,13 @@ const style = {
 
 const LoginModal = () => (
   <ModalMain id="loginModal">
-    <h5 style={style.text}>Sign in with one of this services</h5>
-    <SocialButtons />
+    <h5 style={style.text}>Want to join Chingu Showcase?</h5>
+    <h6 style={style.text}>Just sign in with one of this!</h6>
+    <div style={{ width: '80%', margin: 'auto' }}>
+      <SocialButton service="twitter" />
+      <SocialButton service="google" />
+      <SocialButton service="github" />
+    </div>
   </ModalMain>
 )
 

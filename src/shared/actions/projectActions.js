@@ -2,6 +2,9 @@
 
 import 'isomorphic-fetch'
 
+import { STATIC_PATH, WDS_PORT } from '../config'
+import { isProd } from '../util'
+
 import {
   ADD_PROJECT_ROUTE,
   GET_PROJECTS_ROUTE,
@@ -50,8 +53,12 @@ export const addProject = (
 
   function validateImageURL(imageUrl) {
     imageExists(imageUrl, (exists) => {
-      // Assign random picture if URL is not valid
-      const imgUrl = (exists) ? imgUrlNotValidated : 'https://source.unsplash.com/random/326x300'
+      // Assign placeholder picture if URL is not valid
+      const placeholderImage = isProd ?
+      `${STATIC_PATH}/images/chingu-logo.png` :
+      `http://localhost:${WDS_PORT}/public/images/chingu-logo.png`
+
+      const imgUrl = exists ? imgUrlNotValidated : placeholderImage
       fetch(ADD_PROJECT_ROUTE, {
         method: 'POST',
         headers: {
