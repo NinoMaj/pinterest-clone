@@ -56,9 +56,8 @@ const Gallery = ({
           description={myProject.description}
           imgUrl={myProject.imgUrl}
           pinCount={myProject.pinnedBy.length}
-          isAlreadyPinned={myProject.pinnedBy.includes(userId)}
-          page={page}
-          isLogged={isLogged}
+          allowPinning={false}
+          allowDeleting
           onClickProp={() => handleDeletingProject(myProject._id)}
         />
       ))
@@ -71,9 +70,12 @@ const Gallery = ({
           description={project.description}
           imgUrl={project.imgUrl}
           pinCount={project.pinnedBy.length}
-          isAlreadyPinned={project.pinnedBy.includes(userId)}
-          page={page}
-          isLogged={isLogged}
+          allowPinning={
+            !project.pinnedBy.includes(userId) ||
+            project.author !== userName ||
+            isLogged
+          }
+          allowDeleting={false}
           onClickProp={() => handlePinningProject(project._id)}
         />
       ))

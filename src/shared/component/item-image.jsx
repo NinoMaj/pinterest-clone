@@ -65,21 +65,20 @@ const DeleteText = styled.p`
 type Props = {
   source: string,
   height: string,
-  isLogged: boolean,
-  isAlreadyPinned: boolean,
-  page: string,
+  allowPinning: boolean,
+  allowDeleting: boolean,
   onClickProp: Function,
 }
 
-const ItemImage = ({ source, height, isLogged, isAlreadyPinned, page, onClickProp }: Props) => (
+const ItemImage = ({ source, height, allowPinning, allowDeleting, onClickProp }: Props) => (
   <ImgContainer>
     <Img src={source} alt="project" height={height} />
-    {page === HOME_PAGE_ROUTE && isLogged && !isAlreadyPinned &&
+    {allowPinning &&
       <PinButton onClick={onClickProp}>
         <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
       </PinButton>
     }
-    {page === MY_PROJECTS_ROUTE &&
+    {allowDeleting &&
       <DeleteButton onClick={onClickProp}>
         <DeleteText><i className="fa fa-trash" aria-hidden="true" /></DeleteText>
       </DeleteButton>

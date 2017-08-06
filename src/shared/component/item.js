@@ -20,10 +20,9 @@ type Props = {
   description: string,
   imgUrl: string,
   pinCount: number,
-  isLogged: boolean,
-  isAlreadyPinned: boolean,
-  page: string,
-  onClickProp: func,
+  allowPinning: boolean,
+  allowDeleting: boolean,
+  onClickProp: any,
 }
 
 const Item = ({
@@ -31,19 +30,17 @@ const Item = ({
   title,
   description,
   imgUrl,
-  isLogged,
-  page,
   pinCount,
-  isAlreadyPinned,
+  allowPinning,
+  allowDeleting,
   onClickProp,
 }: Props) => (
   <ItemContainer className="grid-item" >
     <ItemImage
       source={imgUrl}
       height={`${((description.length % 10) * 10) + 250}px`}
-      isLogged={isLogged}
-      isAlreadyPinned={isAlreadyPinned}
-      page={page}
+      allowPinning={allowPinning}
+      allowDeleting={allowDeleting}
       onClickProp={onClickProp}
     />
     <ItemInfo
