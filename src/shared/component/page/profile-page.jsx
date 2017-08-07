@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 import ProfileModal from '../profile-modal'
 import SocialAccount from '../social-account'
+import Notification from '../../container/notification'
 
 const title = 'Profile'
 
@@ -120,6 +121,7 @@ const ProfilePage = ({ user }: Props) => (
           </div>
         </MainDiv>
         <ProfileModal />
+        <Notification />
       </div>
     </div>
   </div>

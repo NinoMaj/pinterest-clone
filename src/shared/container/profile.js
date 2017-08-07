@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { ADD_PROFILE_ROUTE } from '../routes'
+import { displayNotification } from '../actions/notificationActions'
 import {
   updateEmail,
   updateUsername,
@@ -23,7 +24,6 @@ class Profile extends Component {
       country: this.props.country,
       city: this.props.city,
       state: this.props.state,
-      // displaySuccess: false,
     }
   }
 
@@ -65,7 +65,20 @@ class Profile extends Component {
       body: JSON.stringify(this.state),
     })
     .then((res) => {
-      if (!res.ok) throw Error(res.statusText)
+      // If error throw error and siaply error notification
+      if (!res.ok) {
+        this.props.displayNotification(
+          'danger',
+          'Profile not saved',
+          'An error as ocurred and your profile could not be saved',
+        )
+        throw Error(res.statusText)
+      }
+      this.props.displayNotification(
+        'success',
+        'Profile saved!',
+        'Your profile has been successfully updated',
+      )
       return res.json()
     })
     // .then((profileSaved) => {
@@ -76,6 +89,11 @@ class Profile extends Component {
       if (err) {
         // eslint-disable-next-line no-console
         console.log('Add profile error', JSON.stringify(err))
+        this.props.displayNotification(
+          'danger',
+          'Profile not saved',
+          'An error as ocurred and your profile could not be saved',
+        )
       }
     })
   }
@@ -83,8 +101,6 @@ class Profile extends Component {
   handleProfileUpdate() {
     this.updateAllStateFields()
     this.submitProfile()
-    // this.setState({ displaySuccess: true })
-    // setTimeout(() => this.setState({ displaySuccess: false }, 3000))
   }
 
   render() {
@@ -131,6 +147,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    displayNotification,
     updateEmail,
     updateUsername,
     updateFullname,

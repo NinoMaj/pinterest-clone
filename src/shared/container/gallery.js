@@ -8,6 +8,7 @@ import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE } from '../routes'
 import Item from '../component/item'
 import AddProject from '../component/add-project-button'
 import { deleteProject, pinProject } from '../actions/projectActions'
+import { displayNotification } from '../actions/notificationActions'
 
 const Container = styled.div`
   margin: 0 auto;
@@ -36,13 +37,24 @@ const Gallery = ({
   isLogged,
   deleteProjectAction,
   pinProjectAction,
+  displayNotificationAction,
 }: Props) => {
   const handleDeletingProject = (projectId: string) => {
     deleteProjectAction(projectId)
+    displayNotificationAction(
+      'info',
+      'Project deleted',
+      'The project has been successfully deleted',
+    )
   }
 
   const handlePinningProject = (projectId: string) => {
     pinProjectAction(projectId, userId)
+    displayNotificationAction(
+      'success',
+      'Project pinned!',
+      'This project was added to your pinned list',
+    )
   }
   let childElements = null
   if (projects.length > 0) {
@@ -86,7 +98,7 @@ const Gallery = ({
         "gutter": 15,
         "columnWidth": 236,
         "fitWidth": true
-      }'
+        }'
       >
         {childElements}
       </Container>
@@ -107,6 +119,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   deleteProjectAction: projectId => dispatch(deleteProject(projectId)),
   pinProjectAction: (projectId, user) => dispatch(pinProject(projectId, user)),
+  displayNotificationAction: (notifType, title, message) =>
+    dispatch(displayNotification(notifType, title, message)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery)
