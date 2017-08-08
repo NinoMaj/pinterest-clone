@@ -9,3 +9,6 @@ export const UPDATE_COUNTRY = 'UPDATE_COUNTRY'
 export const UPDATE_CITY = 'UPDATE_CITY'
 export const UPDATE_STATE = 'UPDATE_STATE'
 export const ADD_ERROR = 'ADD_ERROR'
+
+// Notification
+export const DISPLAY_NOTIFICATION = 'DISPLAY_NOTIFICATION'

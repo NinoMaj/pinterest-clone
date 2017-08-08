@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { addProject } from '../actions/projectActions'
+import { displayNotification } from '../actions/notificationActions'
 
 class AddProject extends Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class AddProject extends Component {
       inputTitle: '',
       inputDescription: '',
       inputImgUrl: '',
-      submitted: false,
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -29,17 +29,19 @@ class AddProject extends Component {
       this.state.inputDescription,
       this.state.inputImgUrl,
     )
+
     this.setState({
-      submitted: true,
       inputTitle: '',
       inputDescription: '',
       inputImgUrl: '',
     })
-    setTimeout(() => {
-      this.setState({
-        submitted: false,
-      })
-    }, 2000)
+
+    this.props.displayNotificationAction(
+      'success',
+      'Well done!',
+      'Your project has been submitted successfully',
+    )
+
     event.preventDefault()
   }
 
@@ -72,12 +74,6 @@ class AddProject extends Component {
 
           <input type="submit" value="Submit" className="btn btn-primary btn-block" />
 
-          {this.state.submitted &&
-            <div className="alert alert-success mt-3" role="alert">
-              <strong>Well done!</strong> Your project has been submitted successfully.
-            </div>
-          }
-
         </form>
       </div>
     )
@@ -91,6 +87,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addProjectAction: (author, title, description, imgUrl) =>
     dispatch(addProject(author, title, description, imgUrl)),
+
+  displayNotificationAction: (notifType, title, message) =>
+      dispatch(displayNotification(notifType, title, message)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddProject)
