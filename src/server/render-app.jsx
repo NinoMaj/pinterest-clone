@@ -46,7 +46,6 @@ const renderApp = (
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
         <link rel="stylesheet" href="${STATIC_PATH}/css/font-awesome.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <link rel="apple-touch-icon" sizes="180x180" href="${STATIC_PATH}/images/favicons/apple-icon-180x180.png">
         <link rel="icon" type="image/png" sizes="144x144"  href="${STATIC_PATH}/images/favicons/android-icon-144x144.png">
         <link rel="icon" type="image/png" sizes="32x32" href="${STATIC_PATH}/images/favicons/favicon-32x32.png">
@@ -60,7 +59,6 @@ const renderApp = (
         </script>
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
         <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       </body>
     </html>`
   )

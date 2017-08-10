@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 import ProfileModal from '../profile-modal'
 import SocialAccount from '../social-account'
-import Notification from '../../container/notification'
 
 const title = 'Profile'
 
@@ -34,10 +33,6 @@ const InfoDiv = styled.div`
 text-align: left;
 `
 
-const Icon = styled.i`
-margin-right: 10px
-`
-
 const AccountsDiv = styled.div`
 display: flex;
 justify-content: space-around;
@@ -59,12 +54,6 @@ const ProfilePage = ({ user }: Props) => (
     <div className="row">
       <div className="col-12">
         <MainDiv>
-          {/* <div className="alert alert-success alert-dismissible " role="alert">
-            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Changes saved!</strong> Your profile has been successfully updated.
-          </div> */}
 
           <HeaderDiv>
             <Img src="/static/images/chingu-logo.png" alt="user avatar" />
@@ -72,17 +61,17 @@ const ProfilePage = ({ user }: Props) => (
           </HeaderDiv>
 
           <InfoDiv>
-            <Icon className="fa fa-id-card-o" aria-hidden="true" />
+            <i className="fa fa-id-card-o fa-fw" aria-hidden="true" />
             Full name: {user.fullName}
           </InfoDiv>
 
           <InfoDiv>
-            <Icon className="fa fa-envelope-o" aria-hidden="true" />
+            <i className="fa fa-envelope-o fa-fw" aria-hidden="true" />
             Email: {user.email}
           </InfoDiv>
 
           <InfoDiv>
-            <Icon className="fa fa-map-marker" aria-hidden="true" />
+            <i className="fa fa-map-marker fa-fw" aria-hidden="true" />
             Location: {user.city}, {user.state} - {user.country}
           </InfoDiv>
 
@@ -121,7 +110,6 @@ const ProfilePage = ({ user }: Props) => (
           </div>
         </MainDiv>
         <ProfileModal />
-        <Notification />
       </div>
     </div>
   </div>
