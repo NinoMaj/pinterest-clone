@@ -83,8 +83,8 @@ const Gallery = ({
           imgUrl={project.imgUrl}
           pinCount={project.pinnedBy.length}
           allowPinning={
-            !project.pinnedBy.includes(userId) ||
-            project.author !== userName ||
+            !project.pinnedBy.includes(userId) &&
+            project.author !== userName &&
             isLogged
           }
           allowDeleting={false}
