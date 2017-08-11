@@ -84,9 +84,7 @@ export default (app: Object, passport: Object) => {
   })
 
   app.get(LOGOUT_PAGE_ROUTE, isLoggedIn, (req, res) => {
-    req.logOut()
-    res.clearCookie('connect.sid')
-    // req.session.destroy()
+    req.logout()
     res.send(renderApp(req.url, req, logoutPage()))
   })
 
