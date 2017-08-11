@@ -91,6 +91,9 @@ const Gallery = ({
 
   return (
     <div>
+      {page === MY_PROJECTS_ROUTE &&
+        <AddProject />
+      }
       <Container
         className="grid"
         data-masonry='{
@@ -102,9 +105,6 @@ const Gallery = ({
       >
         {childElements}
       </Container>
-      {page === MY_PROJECTS_ROUTE &&
-        <AddProject />
-      }
     </div>
   )
 }

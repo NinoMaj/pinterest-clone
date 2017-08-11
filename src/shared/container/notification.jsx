@@ -14,7 +14,8 @@ class Notification extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.notifType === nextProps.notifType &&
       this.props.title === nextProps.title &&
-      this.props.message === nextProps.message) {
+      this.props.message === nextProps.message &&
+      this.props.id === nextProps.id) {
       return
     }
     this.setState({ show: true }) // Show notification
@@ -41,6 +42,7 @@ const mapStateToProps = state => (
     notifType: state.notification.notifType,
     title: state.notification.title,
     message: state.notification.message,
+    id: state.notification.id,
   }
 )
 

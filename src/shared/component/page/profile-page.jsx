@@ -38,6 +38,11 @@ display: flex;
 justify-content: space-around;
 `
 
+const Button = styled.button`
+  cursor: pointer;
+  margin: 15px 0;
+`
+
 type Props = {
   user: object,
 }
@@ -75,14 +80,13 @@ const ProfilePage = ({ user }: Props) => (
             Location: {user.city}, {user.state} - {user.country}
           </InfoDiv>
 
-          <button
+          <Button
             type="button"
-            style={{ margin: '15px 0' }}
             className="btn btn-primary"
             data-toggle="modal"
             data-target="#profileModal"
           >Edit profile
-          </button>
+          </Button>
 
           <div>
             <h4>Linked accounts: </h4>
