@@ -1,23 +1,18 @@
 import { DISPLAY_NOTIFICATION } from '../actions/actionsTypes'
 
-// const initialState = {
-//   notifType: 'success',
-//   title: 'Project added',
-//   message: 'Your project has been successfully added',
-// }
-
 const initialState = {
+  id: '',
   notifType: '',
   title: '',
   message: '',
 }
 
 const notificationReducer = (state = initialState, action) => {
-  const { notifType, title, message } = action
+  const { id, notifType, title, message } = action
 
   switch (action.type) {
     case DISPLAY_NOTIFICATION:
-      return Object.assign({}, state, { notifType, title, message })
+      return Object.assign({}, state, { id, notifType, title, message })
 
     default:
       return state

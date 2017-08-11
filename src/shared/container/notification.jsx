@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import NotificationDiv from '../component/notification'
-// import { displayNotification } from '../actions/notificationActions'
 
 class Notification extends Component {
   constructor(props) {
@@ -12,11 +11,15 @@ class Notification extends Component {
     }
   }
 
-  componentWillReceiveProps() {
-    // const { notifType, title, message } = newProps
-    // this.props.displayNotificationAction(notifType, title, message) // Dispatch action
+  componentWillReceiveProps(nextProps) {
+    if (this.props.notifType === nextProps.notifType &&
+      this.props.title === nextProps.title &&
+      this.props.message === nextProps.message &&
+      this.props.id === nextProps.id) {
+      return
+    }
     this.setState({ show: true }) // Show notification
-    setTimeout(() => { this.setState({ show: false }) }, 5000) // Hide notification after 3 secs
+    setTimeout(() => { this.setState({ show: false }) }, 5000) // Hide notification after 5s
   }
 
   render() {
@@ -39,12 +42,8 @@ const mapStateToProps = state => (
     notifType: state.notification.notifType,
     title: state.notification.title,
     message: state.notification.message,
+    id: state.notification.id,
   }
 )
-
-// const mapDispatchToProps = dispatch => ({
-//   displayNotificationAction: (notifType, title, message) =>
-//     dispatch(displayNotification(notifType, title, message)),
-// })
 
 export default connect(mapStateToProps)(Notification)

@@ -72,7 +72,12 @@ class AddProject extends Component {
             </div>
           </div>
 
-          <input type="submit" value="Submit" className="btn btn-primary btn-block" />
+          <input
+            type="submit"
+            value="Submit"
+            className="btn btn-primary btn-block"
+            style={{ cursor: 'pointer' }}
+          />
 
         </form>
       </div>

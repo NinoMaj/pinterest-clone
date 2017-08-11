@@ -121,10 +121,11 @@ class Profile extends Component {
           {this.infoInput('State:', 'California', 'state')}
 
           <button
+            aria-label="Close"
             className="btn btn-primary btn-block"
             data-dismiss="modal"
-            aria-label="Close"
             onClick={() => this.handleProfileUpdate()}
+            style={{ cursor: 'pointer' }}
           >Save Changes
           </button>
         </div>
