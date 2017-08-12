@@ -13,7 +13,9 @@ type Props = {
 }
 
 const LogoutPage = ({ history, logoutAction }: Props) => {
-  document.cookie = 'connect.sid=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;'
+  if (typeof window !== 'undefined') {
+    window.location.href = '/logout'
+  }
   setTimeout(() => {
     logoutAction()
     history.push('/')
