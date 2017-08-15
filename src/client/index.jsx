@@ -10,9 +10,6 @@ import { BrowserRouter } from 'react-router-dom'
 import $ from 'jquery'
 import Tether from 'tether'
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-
 import App from '../shared/app'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
 import store from './store'
@@ -24,13 +21,11 @@ require('bootstrap')
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 const wrapApp = (AppComponent, reduxStore) =>
   (<Provider store={reduxStore}>
-    <MuiThemeProvider muiTheme={getMuiTheme({ userAgent: navigator.userAgent })}>
       <BrowserRouter>
         <AppContainer>
           <AppComponent />
         </AppContainer>
       </BrowserRouter>
-    </MuiThemeProvider>
   </Provider>)
 
 ReactDOM.render(wrapApp(App, store), rootEl)
