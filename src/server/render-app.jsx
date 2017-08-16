@@ -5,8 +5,6 @@ import ReactDOMServer from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router'
 import Helmet from 'react-helmet'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { ServerStyleSheet } from 'styled-components'
 
 import initStore from './init-store'
@@ -24,11 +22,9 @@ const renderApp = (
   const sheet = new ServerStyleSheet()
   const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(
     <Provider store={store}>
-      <MuiThemeProvider muiTheme={getMuiTheme({ userAgent: req.headers['user-agent'] })}>
-        <StaticRouter location={location} context={routerContext}>
-          <App />
-        </StaticRouter>
-      </MuiThemeProvider>
+      <StaticRouter location={location} context={routerContext}>
+        <App />
+      </StaticRouter>
     </Provider>),
   )
   const head = Helmet.rewind()
