@@ -40,6 +40,7 @@ export const addProject = (
   author: string,
   title: string,
   description: string,
+  projectUrl: string,
   imgUrlNotValidated: string,
 ) => (dispatch: Function) => {
   dispatch(projectRequest())
@@ -68,6 +69,7 @@ export const addProject = (
           author,
           title,
           description,
+          projectUrl,
           imgUrl,
         }),
       })

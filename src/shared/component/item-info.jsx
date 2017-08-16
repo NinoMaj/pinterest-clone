@@ -11,6 +11,15 @@ const Title = styled.div`
   width: 94%;
 `
 
+const Link = styled.a`
+  text-decoration: none;
+  color: #fff;
+
+  &:hover {
+    color: #0DBD53;
+  }
+`
+
 const PinCount = styled.span`
   float: right;
 `
@@ -35,10 +44,10 @@ type Props = {
   author: string,
 }
 
-const ItemInfo = ({ author, title, pinCount }: Props) => (
+const ItemInfo = ({ author, title, projectUrl, pinCount }: Props) => (
   <div>
     <Title>
-      {title}
+      <Link href={projectUrl}>{title}</Link>
     </Title>
 
     <AuthorAndPinCount>

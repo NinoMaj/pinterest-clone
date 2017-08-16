@@ -19,6 +19,7 @@ type Props = {
   author: string,
   title: string,
   description: string,
+  projectUrl: string,
   imgUrl: string,
   pinCount: number,
   allowPinning: boolean,
@@ -30,6 +31,7 @@ const Item = ({
   author,
   title,
   description,
+  projectUrl,
   imgUrl,
   pinCount,
   allowPinning,
@@ -48,6 +50,7 @@ const Item = ({
     <ItemInfo
       author={author}
       title={title}
+      projectUrl={projectUrl}
       pinCount={pinCount}
     />
   </ItemContainer>
