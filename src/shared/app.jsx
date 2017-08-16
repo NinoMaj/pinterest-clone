@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 
 import { APP_NAME } from './config'
 import Nav from './component/nav'
-import Notification, { handleShow } from './container/notification'
+import Notification from './container/notification'
 import HomePage from './component/page/home'
 import MyProjectsPage from './component/page/my-projects-page'
 import ProfilePage from './component/page/profile-page'

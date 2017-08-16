@@ -28,6 +28,7 @@ router.post('/add-project', (req, res) => {
     author,
     title,
     description,
+    projectUrl,
     imgUrl,
   } = req.body
 
@@ -36,6 +37,7 @@ router.post('/add-project', (req, res) => {
     author,
     title,
     description,
+    projectUrl,
     imgUrl,
   }
   const project = new Project(newProject)

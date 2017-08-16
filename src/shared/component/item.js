@@ -7,10 +7,11 @@ import ItemImage from './item-image'
 import ItemInfo from './item-info'
 
 const ItemContainer = styled.div`
-  background-color: lightgray;
+  background-color: #292b2c;
+  color: #fff;
   float: left;
-  width: 236px;
-  margin-bottom: 10px;
+  width: 250px;
+  margin: 5px;
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
 `
 
@@ -18,6 +19,7 @@ type Props = {
   author: string,
   title: string,
   description: string,
+  projectUrl: string,
   imgUrl: string,
   pinCount: number,
   allowPinning: boolean,
@@ -29,6 +31,7 @@ const Item = ({
   author,
   title,
   description,
+  projectUrl,
   imgUrl,
   pinCount,
   allowPinning,
@@ -37,8 +40,9 @@ const Item = ({
 }: Props) => (
   <ItemContainer className="grid-item" >
     <ItemImage
+      description={description}
       source={imgUrl}
-      height={`${((description.length % 10) * 10) + 250}px`}
+      height={'300px'}
       allowPinning={allowPinning}
       allowDeleting={allowDeleting}
       onClickProp={onClickProp}
@@ -46,7 +50,7 @@ const Item = ({
     <ItemInfo
       author={author}
       title={title}
-      description={description}
+      projectUrl={projectUrl}
       pinCount={pinCount}
     />
   </ItemContainer>

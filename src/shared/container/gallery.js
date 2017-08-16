@@ -66,6 +66,7 @@ const Gallery = ({
           author={'me'}
           title={myProject.title}
           description={myProject.description}
+          projectUrl={myProject.projectUrl}
           imgUrl={myProject.imgUrl}
           pinCount={myProject.pinnedBy.length}
           allowPinning={false}
@@ -80,6 +81,7 @@ const Gallery = ({
           author={project.author}
           title={project.title}
           description={project.description}
+          projectUrl={project.projectUrl}
           imgUrl={project.imgUrl}
           pinCount={project.pinnedBy.length}
           allowPinning={
@@ -104,7 +106,7 @@ const Gallery = ({
         data-masonry='{
         "itemSelector": ".grid-item",
         "gutter": 15,
-        "columnWidth": 236,
+        "columnWidth": 250,
         "fitWidth": true
         }'
       >
