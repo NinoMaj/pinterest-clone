@@ -3,66 +3,66 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE } from '../routes'
-
 const ImgContainer = styled.div`
   position: relative;
+  overflow: hidden;
 `
 const Img = styled.img`
   height: ${props => props.height};
-  width: 226px;
+  width: 250px;
   margin: 5px auto;
   display: block;
 
   ${ImgContainer}:hover & {
-    filter: brightness(50%);
+    filter: brightness(50%) blur(5px);
     transition: all 1s ease;
   }
 `
-const PinButton = styled.div`
-  text-align: center;
-  width: 30%;
-  height: 30px;
-  color: white;
+
+const Button = styled.div`
   background-color: rgb(180, 11, 31);
   border-radius: 4px;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  display: none;
+  color: white;
   cursor: pointer;
+  display: none;
+  height: 30px;
+  padding: 0 12px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 5px;
+  z-index: 5;
 
   ${ImgContainer}:hover & {
-	  display: block;
-	}
+    display: block;
+  }
 `
-const PinText = styled.p`
+
+const Text = styled.p`
   padding-top: 3px;
 `
 
-const DeleteButton = styled.div`
-  text-align: center;
-  width: 15%;
-  height: 30px;
-  color: white;
-  background-color: rgb(180, 11, 31);
-  border-radius: 4px;
+const DescriptionOverlay = styled.div`
   position: absolute;
-  top: 5px;
-  right: 10px;
-  display: none;
-  cursor: pointer;
+  bottom: -380px;
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  width: 100%;
+  transition: all 0.5s;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
 
   ${ImgContainer}:hover & {
-	  display: block;
-	}
+    bottom: 0;
+  }
 `
-
-const DeleteText = styled.p`
-  padding-top: 3px;
+const DescriptionText = styled.p`
+  padding: 35px 10px 10px;
 `
 
 type Props = {
+  description: string,
   source: string,
   height: string,
   allowPinning: boolean,
@@ -70,20 +70,32 @@ type Props = {
   onClickProp: Function,
 }
 
-const ItemImage = ({ source, height, allowPinning, allowDeleting, onClickProp }: Props) => (
-  <ImgContainer>
-    <Img src={source} alt="project" height={height} />
-    {allowPinning &&
-      <PinButton onClick={onClickProp}>
-        <PinText>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></PinText>
-      </PinButton>
-    }
-    {allowDeleting &&
-      <DeleteButton onClick={onClickProp}>
-        <DeleteText><i className="fa fa-trash" aria-hidden="true" /></DeleteText>
-      </DeleteButton>
-    }
-  </ImgContainer>
+const ItemImage = ({
+  description,
+  source,
+  height,
+  allowPinning,
+  allowDeleting,
+  onClickProp }: Props) => (
+    <ImgContainer>
+      {allowPinning &&
+        <Button onClick={onClickProp}>
+          <Text>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></Text>
+        </Button>
+      }
+      {allowDeleting &&
+        <Button onClick={onClickProp}>
+          <Text><i className="fa fa-trash" aria-hidden="true" /></Text>
+        </Button>
+      }
+
+      <Img src={source} alt="project" height={height} />
+
+      <DescriptionOverlay>
+        <DescriptionText>{description}</DescriptionText>
+      </DescriptionOverlay>
+
+    </ImgContainer>
 )
 
 export default ItemImage

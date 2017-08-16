@@ -3,24 +3,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const DescriptionAndPinCount = styled.div`
-  display: flex;
+const Title = styled.div`
+  font-size: 18px;
   height: 30px;
-  width: 94%;
   margin: 2px auto;
-`
-const Description = styled.p`
-  flex-grow: 4;
-`
-
-const PinCount = styled.p`
-  flex-grow: 1;
-  text-align: right;
-  padding-top: 6px;
-  font-size: 0.8em;
+  text-align: center;
+  width: 94%;
 `
 
-const Author = styled.div`
+const PinCount = styled.span`
+  float: right;
+`
+
+const AuthorAndPinCount = styled.div`
   height: 30px;
   width: 94%;
   margin: 2px auto;
@@ -35,29 +30,32 @@ const AuthorName = styled.span`
 `
 
 type Props = {
-  description: string,
+  title: string,
   pinCount: number,
   author: string,
 }
 
-const ItemInfo = ({ author, description, pinCount }: Props) => (
+const ItemInfo = ({ author, title, pinCount }: Props) => (
   <div>
-    <DescriptionAndPinCount>
-      <Description>
-        {description}
-      </Description>
-      <PinCount>
-        <i className="fa fa-thumb-tack" aria-hidden="true" /> {pinCount}
-      </PinCount>
-    </DescriptionAndPinCount>
-    <Author>
+    <Title>
+      {title}
+    </Title>
+
+    <AuthorAndPinCount>
+
       <AuthorLogo>
         <i className="fa fa-user" aria-hidden="true" />
       </AuthorLogo>
+
       <AuthorName>
         {author}
       </AuthorName>
-    </Author>
+
+      <PinCount>
+        <i className="fa fa-thumb-tack" aria-hidden="true" /> {pinCount}
+      </PinCount>
+
+    </AuthorAndPinCount>
   </div>
 )
 export default ItemInfo

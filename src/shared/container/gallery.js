@@ -104,7 +104,7 @@ const Gallery = ({
         data-masonry='{
         "itemSelector": ".grid-item",
         "gutter": 15,
-        "columnWidth": 236,
+        "columnWidth": 250,
         "fitWidth": true
         }'
       >
