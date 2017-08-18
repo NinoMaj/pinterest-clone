@@ -5,8 +5,6 @@ import Helmet from 'react-helmet'
 
 import { MY_PROJECTS_ROUTE } from '../../routes'
 import Gallery from '../../container/gallery'
-import Modal from '../modal'
-import AddProjectModal from '../add-project-modal'
 
 const title = 'My projects page'
 
@@ -23,9 +21,6 @@ const MyProjectsPage = () => (
       <div className="col-12">
         <h3>My projects:</h3>
         <Gallery page={MY_PROJECTS_ROUTE} />
-        <Modal>
-          <AddProjectModal />
-        </Modal>
       </div>
     </div>
   </div>

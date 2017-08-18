@@ -24,7 +24,9 @@ type Props = {
   pinCount: number,
   allowPinning: boolean,
   allowDeleting: boolean,
-  onClickProp: any,
+  // editProject: any, // As this changes depending of page, are not always required
+  // deleteProject: any,
+  // pinProject: any,
 }
 
 const Item = ({
@@ -36,7 +38,9 @@ const Item = ({
   pinCount,
   allowPinning,
   allowDeleting,
-  onClickProp,
+  editProject,
+  deleteProject,
+  pinProject,
 }: Props) => (
   <ItemContainer className="grid-item" >
     <ItemImage
@@ -45,7 +49,9 @@ const Item = ({
       height={'300px'}
       allowPinning={allowPinning}
       allowDeleting={allowDeleting}
-      onClickProp={onClickProp}
+      editProject={editProject}
+      deleteProject={deleteProject}
+      pinProject={pinProject}
     />
     <ItemInfo
       author={author}

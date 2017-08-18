@@ -8,6 +8,7 @@ import { isProd } from '../util'
 import {
   ADD_PROJECT_ROUTE,
   GET_PROJECTS_ROUTE,
+  EDIT_PROJECT_ROUTE,
   PIN_PROJECT_ROUTE,
   DELETE_PROJECT_ROUTE,
 } from '../../shared/routes'
@@ -111,6 +112,44 @@ export const getProjects = () => (dispatch: Function) => {
       dispatch(projectFailure(err))
     })
 }
+
+// TODO: Add ImageURL
+export const editProject = (
+  projectToEdit: String,
+  title: string,
+  description: string,
+  projectUrl: string,
+) => (dispatch: Function) => {
+  dispatch(projectRequest())
+
+  fetch(EDIT_PROJECT_ROUTE(projectToEdit), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title,
+      description,
+      projectUrl,
+    }),
+  })
+  .then((res) => {
+    if (!res.ok) throw Error(res.statusText)
+    return res.json()
+  })
+  .then((projectEdited) => {
+    if (!projectEdited) throw Error('Project not saved.')
+    dispatch(updateProjectSuccess(projectEdited))
+  })
+  .catch((err) => {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.log('Edit project error', JSON.stringify(err))
+      dispatch(projectFailure(err))
+    }
+  })
+}
+
 
 export const pinProject = (projectToPin: string, pinnedBy: string) => (dispatch: Function) => {
   dispatch(projectRequest())

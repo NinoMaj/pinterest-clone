@@ -14,6 +14,7 @@ export const AUTH_GITHUB_CALLBACK = '/auth/github/callback'
 
 export const ADD_PROJECT_ROUTE = '/api/projects/add-project'
 export const GET_PROJECTS_ROUTE = '/api/projects/get-projects'
+export const EDIT_PROJECT_ROUTE = (project: string) => `/api/projects/edit-project/${project}`
 export const PIN_PROJECT_ROUTE = (project: string, user: string) => `/api/projects/pin-project/${project}/${user}`
 export const DELETE_PROJECT_ROUTE = (project: string) => `/api/projects/delete-project/${project}`
 
