@@ -12,6 +12,7 @@ import { displayNotification } from '../actions/notificationActions'
 
 const Container = styled.div`
   margin: 0 auto;
+  display: flex;
 
   &:after {
     content: '';
@@ -101,15 +102,7 @@ const Gallery = ({
       {page === MY_PROJECTS_ROUTE &&
         <AddProject />
       }
-      <Container
-        className="grid"
-        data-masonry='{
-        "itemSelector": ".grid-item",
-        "gutter": 15,
-        "columnWidth": 250,
-        "fitWidth": true
-        }'
-      >
+      <Container>
         {childElements}
       </Container>
     </div>
