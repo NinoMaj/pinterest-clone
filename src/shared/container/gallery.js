@@ -11,7 +11,6 @@ import { deleteProject, pinProject } from '../actions/projectActions'
 import { displayNotification } from '../actions/notificationActions'
 
 const Container = styled.div`
-  margin: 0 auto;
   display: flex;
 
   &:after {
