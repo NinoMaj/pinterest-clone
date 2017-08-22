@@ -19,7 +19,7 @@ type Props = {
   author: string,
   title: string,
   description: string,
-  projectUrl: string,
+  projectUrl: ?string,
   imgUrl: string,
   pinCount: number,
   allowPinning: boolean,
