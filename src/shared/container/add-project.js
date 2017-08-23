@@ -16,10 +16,10 @@ class AddProject extends Component {
     this.handleEditSubmit = this.handleEditSubmit.bind(this)
   }
 
-  componentWillReceiveProps() {
-    if (this.props.editingProjectInfo) {
-      console.log('AddProject component will receive new props')
-      const { title, description, projectUrl } = this.props.editingProjectInfo
+  componentWillReceiveProps(nextProps) {
+    if (this.props.editingProjectInfo.title !== nextProps.editingProjectInfo.title
+      && nextProps.editingProjectInfo.title !== '') {
+      const { title, description, projectUrl } = nextProps.editingProjectInfo
       this.setState({
         inputTitle: title,
         inputDescription: description,
@@ -72,6 +72,8 @@ class AddProject extends Component {
       inputImgUrl: '',
     })
 
+    this.props.resetEditingProject()
+
     this.props.displayNotification(
       'success',
       'Project edited!',
@@ -82,10 +84,11 @@ class AddProject extends Component {
   }
 
   render() {
+    const { title } = this.props.editingProjectInfo
     return (
       <div>
         <h4 className="mb-3">Input your project details: </h4>
-        <form onSubmit={this.handleEditSubmit}>
+        <form onSubmit={title !== '' ? this.handleEditSubmit : this.handleSubmit}>
 
           <div className="form-group row">
             <label htmlFor="text-input" className="col-3 col-form-label">Title:</label>

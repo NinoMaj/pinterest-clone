@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE } from '../routes'
 import Item from '../component/item'
-import Modal from '..//component/modal'
 import AddProjectModal from '..//component/add-project-modal'
 import AddProjectButton from '../component/add-project-button'
 import { addProject, deleteProject, pinProject, editProject } from '../actions/projectActions'
@@ -127,13 +126,16 @@ class Gallery extends Component {
 
   handleEditingProject(projectId, title, description, projectUrl) {
     this.setState({
-      projectEdit: Object.assign(
-        {},
-        this.state.projectEdit,
-        { projectId, title, description, projectUrl },
-      ),
+      projectEdit: { projectId, title, description, projectUrl },
     })
   }
+
+  resetEditingProject() {
+    this.setState({
+      projectEdit: { title: '', description: '', projectUrl: '', projectId: '' },
+    })
+  }
+
 
   render() {
     const childElements = this.setChildElements()
@@ -142,15 +144,14 @@ class Gallery extends Component {
         {this.props.page === MY_PROJECTS_ROUTE &&
           <div>
             <AddProjectButton />
-            <Modal>
-              <AddProjectModal
-                addProject={this.props.addProjectAction}
-                editProject={this.props.editProjectAction}
-                displayNotification={this.props.displayNotificationAction}
-                editingProjectInfo={this.state.projectEdit}
-                userName={this.props.userName}
-              />
-            </Modal>
+            <AddProjectModal
+              addProject={this.props.addProjectAction}
+              editProject={this.props.editProjectAction}
+              displayNotification={this.props.displayNotificationAction}
+              editingProjectInfo={this.state.projectEdit}
+              resetEditingProject={() => this.resetEditingProject()}
+              userName={this.props.userName}
+            />
           </div>
         }
         <Container

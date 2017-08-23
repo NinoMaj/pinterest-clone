@@ -7,16 +7,19 @@ const AddProjectModal = ({
   editProject,
   displayNotification,
   editingProjectInfo,
-  userName }) => (
+  resetEditingProject,
+  userName }) =>
+  (
     <ModalMain id="addProjectModal">
       <AddProject
         addProject={addProject}
         editProject={editProject}
         displayNotification={displayNotification}
         editingProjectInfo={editingProjectInfo}
+        resetEditingProject={resetEditingProject}
         userName={userName}
       />
     </ModalMain>
-)
+  )
 
 export default AddProjectModal
