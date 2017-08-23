@@ -9,7 +9,7 @@ import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../../container/gallery'
 
 const HomePage = () => (
-  <div className="mt-4">
+  <div className="container mt-5">
     <Helmet
       meta={[
         { name: 'description', content: '{Pinerest clone app' },
@@ -17,8 +17,12 @@ const HomePage = () => (
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
       ]}
     />
-    <LoginModal />
-    <Gallery page={HOME_PAGE_ROUTE} />
+    <div className="row">
+      <div className="col-12">
+        <LoginModal />
+        <Gallery page={HOME_PAGE_ROUTE} />
+      </div>
+    </div>
   </div>
 )
 

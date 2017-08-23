@@ -12,7 +12,8 @@ import { addProject, deleteProject, pinProject, editProject } from '../actions/p
 import { displayNotification } from '../actions/notificationActions'
 
 const Container = styled.div`
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
 
   &:after {
     content: '';
