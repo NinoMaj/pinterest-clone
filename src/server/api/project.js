@@ -54,6 +54,29 @@ router.post('/add-project', (req, res) => {
   })
 })
 
+// TODO: Add ImageURL
+router.post('/edit-project/:projectToEdit', (req, res) => {
+  const { title, description, projectUrl } = req.body
+
+  const promise = Project.findOne({ _id: req.params.projectToEdit }).exec()
+  promise.then((project) => {
+    const updatedProject = project
+    updatedProject.title = title
+    updatedProject.description = description
+    updatedProject.projectUrl = projectUrl
+    updatedProject.save()
+    res.status(200).send(updatedProject)
+  })
+    .catch((err) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.log('error in edit project API:', err)
+        return res.status(500).send('Error while editing project:', err)
+      }
+      return res.json()
+    })
+})
+
 router.put('/pin-project/:projectToPin/:user', (req, res) => {
   const promise = Project.findOne({ _id: req.params.projectToPin }).exec()
 

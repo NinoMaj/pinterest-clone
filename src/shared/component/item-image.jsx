@@ -6,12 +6,12 @@ import styled from 'styled-components'
 const ImgContainer = styled.div`
   position: relative;
   overflow: hidden;
+  height: ${props => props.height}
 `
-const Img = styled.img`
-  height: ${props => props.height};
-  width: 250px;
-  margin: 5px auto;
-  display: block;
+const ImgDiv = styled.div`
+  background: url(${props => props.source}) no-repeat center;
+  background-size: cover;
+  height: 100%;
 
   ${ImgContainer}:hover & {
     filter: brightness(50%) blur(5px);
@@ -38,8 +38,13 @@ const Button = styled.div`
   }
 `
 
+const EditButton = Button.extend`
+  background-color: #0D99BE;
+  right: 55px;
+`
+
 const Text = styled.p`
-  padding-top: 3px;
+  padding-top: 2px;
 `
 
 const DescriptionOverlay = styled.div`
@@ -67,7 +72,9 @@ type Props = {
   height: string,
   allowPinning: boolean,
   allowDeleting: boolean,
-  onClickProp: Function,
+  // editProject: Function, // As this changes depending of page, are not always required
+  // deleteProject: Function,
+  // pinProject: Function,
 }
 
 const ItemImage = ({
@@ -76,20 +83,28 @@ const ItemImage = ({
   height,
   allowPinning,
   allowDeleting,
-  onClickProp }: Props) => (
-    <ImgContainer>
+  editProject,
+  deleteProject,
+  pinProject }: Props) => (
+    <ImgContainer height={height}>
       {allowPinning &&
-        <Button onClick={onClickProp}>
-          <Text>SAVE <i className="fa fa-thumb-tack" aria-hidden="true" /></Text>
+        <Button onClick={pinProject}>
+          <Text>SAVE <i className="fa fa-thumb-tack fa-lg" aria-hidden="true" /></Text>
         </Button>
       }
       {allowDeleting &&
-        <Button onClick={onClickProp}>
-          <Text><i className="fa fa-trash" aria-hidden="true" /></Text>
-        </Button>
+        <div>
+          <EditButton onClick={editProject} data-toggle="modal" data-target="#addProjectModal">
+            <Text><i className="fa fa-pencil-square-o fa-lg" aria-hidden="true" /></Text>
+          </EditButton>
+
+          <Button onClick={deleteProject}>
+            <Text><i className="fa fa-trash fa-lg" aria-hidden="true" /></Text>
+          </Button>
+        </div>
       }
 
-      <Img src={source} alt="project" height={height} />
+      <ImgDiv source={source} />
 
       <DescriptionOverlay>
         <DescriptionText>{description}</DescriptionText>

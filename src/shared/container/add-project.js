@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-
-import { addProject } from '../actions/projectActions'
-import { displayNotification } from '../actions/notificationActions'
 
 class AddProject extends Component {
   constructor(props) {
@@ -17,6 +13,19 @@ class AddProject extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEditSubmit = this.handleEditSubmit.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.editingProjectInfo.title !== nextProps.editingProjectInfo.title
+      && nextProps.editingProjectInfo.title !== '') {
+      const { title, description, projectUrl } = nextProps.editingProjectInfo
+      this.setState({
+        inputTitle: title,
+        inputDescription: description,
+        inputProjectUrl: projectUrl,
+      })
+    }
   }
 
   handleChange(event) {
@@ -24,7 +33,7 @@ class AddProject extends Component {
   }
 
   handleSubmit(event) {
-    this.props.addProjectAction(
+    this.props.addProject(
       this.props.userName,
       this.state.inputTitle,
       this.state.inputDescription,
@@ -39,7 +48,7 @@ class AddProject extends Component {
       inputImgUrl: '',
     })
 
-    this.props.displayNotificationAction(
+    this.props.displayNotification(
       'success',
       'Well done!',
       'Your project has been submitted successfully',
@@ -51,11 +60,38 @@ class AddProject extends Component {
     event.preventDefault()
   }
 
+  handleEditSubmit(event) {
+    this.props.editProject(
+      this.props.editingProjectInfo.projectId,
+      this.state.inputTitle,
+      this.state.inputDescription,
+      this.state.inputProjectUrl,
+    )
+
+    this.setState({
+      inputTitle: '',
+      inputDescription: '',
+      inputProjectUrl: '',
+      inputImgUrl: '',
+    })
+
+    this.props.resetEditingProject()
+
+    this.props.displayNotification(
+      'success',
+      'Project edited!',
+      'Your project has been edited and updated successfully',
+    )
+
+    event.preventDefault()
+  }
+
   render() {
+    const { title } = this.props.editingProjectInfo
     return (
       <div>
         <h4 className="mb-3">Input your project details: </h4>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={title !== '' ? this.handleEditSubmit : this.handleSubmit}>
 
           <div className="form-group row">
             <label htmlFor="text-input" className="col-3 col-form-label">Title:</label>
@@ -123,16 +159,4 @@ class AddProject extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  userName: state.user.userName,
-})
-
-const mapDispatchToProps = dispatch => ({
-  addProjectAction: (author, title, description, projectUrl, imgUrl) =>
-    dispatch(addProject(author, title, description, projectUrl, imgUrl)),
-
-  displayNotificationAction: (notifType, title, message) =>
-      dispatch(displayNotification(notifType, title, message)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddProject)
+export default AddProject
