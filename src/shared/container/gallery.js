@@ -155,15 +155,7 @@ class Gallery extends Component {
             />
           </div>
         }
-        <Container
-          className="grid"
-          data-masonry='{
-          "itemSelector": ".grid-item",
-          "gutter": 15,
-          "columnWidth": 250,
-          "fitWidth": true
-          }'
-        >
+        <Container>
           {childElements}
         </Container>
       </div>
