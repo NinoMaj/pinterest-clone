@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ImgContainer = styled.div`
+  border-radius: 5px 5px 0 0;
   position: relative;
   overflow: hidden;
   height: ${props => props.height}
@@ -55,7 +56,7 @@ const DescriptionOverlay = styled.div`
   width: 100%;
   transition: all 0.5s;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
 
   ${ImgContainer}:hover & {

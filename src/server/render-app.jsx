@@ -42,6 +42,7 @@ const renderApp = (
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
         <link rel="stylesheet" href="${STATIC_PATH}/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="180x180" href="${STATIC_PATH}/images/favicons/apple-icon-180x180.png">
         <link rel="icon" type="image/png" sizes="144x144"  href="${STATIC_PATH}/images/favicons/android-icon-144x144.png">
         <link rel="icon" type="image/png" sizes="32x32" href="${STATIC_PATH}/images/favicons/favicon-32x32.png">
