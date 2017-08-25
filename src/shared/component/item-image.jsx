@@ -21,13 +21,11 @@ const ImgDiv = styled.div`
 `
 
 const Button = styled.div`
-  background-color: rgb(180, 11, 31);
-  border-radius: 4px;
   color: white;
   cursor: pointer;
   display: none;
-  height: 30px;
-  padding: 0 12px;
+  font-size: 13px;
+  padding: 3px 8px;
   position: absolute;
   right: 10px;
   text-align: center;
@@ -39,13 +37,15 @@ const Button = styled.div`
   }
 `
 
-const EditButton = Button.extend`
-  background-color: #0D99BE;
-  right: 55px;
+const DeleteButton = Button.extend`
+
 `
 
-const Text = styled.p`
-  padding-top: 2px;
+const PinButton = Button.extend`
+`
+
+const EditButton = Button.extend`
+  right: 45px;
 `
 
 const DescriptionOverlay = styled.div`
@@ -89,19 +89,25 @@ const ItemImage = ({
   pinProject }: Props) => (
     <ImgContainer height={height}>
       {allowPinning &&
-        <Button onClick={pinProject}>
-          <Text>SAVE <i className="fa fa-thumb-tack fa-lg" aria-hidden="true" /></Text>
-        </Button>
+        <PinButton type="button" className="btn btn-success" onClick={pinProject}>
+          Save <i className="fa fa-thumb-tack fa-lg" aria-hidden="true" />
+        </PinButton>
       }
       {allowDeleting &&
         <div>
-          <EditButton onClick={editProject} data-toggle="modal" data-target="#addProjectModal">
-            <Text><i className="fa fa-pencil-square-o fa-lg" aria-hidden="true" /></Text>
+          <EditButton
+            type="button"
+            className="btn btn-primary"
+            onClick={editProject}
+            data-toggle="modal"
+            data-target="#addProjectModal"
+          >
+            <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true" />
           </EditButton>
 
-          <Button onClick={deleteProject}>
-            <Text><i className="fa fa-trash fa-lg" aria-hidden="true" /></Text>
-          </Button>
+          <DeleteButton type="button" className="btn btn-danger" onClick={deleteProject}>
+            <i className="fa fa-trash fa-lg" aria-hidden="true" />
+          </DeleteButton>
         </div>
       }
 

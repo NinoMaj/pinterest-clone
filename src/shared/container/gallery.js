@@ -14,6 +14,7 @@ import { displayNotification } from '../actions/notificationActions'
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
   &:after {
     content: '';
