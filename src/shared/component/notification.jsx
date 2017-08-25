@@ -7,7 +7,7 @@ const NotifDiv = styled.div`
   display: inline-flex;
   opacity: .9;
   padding-left: 10px;
-  position: absolute;
+  position: fixed;
   right: 10px;
   z-index: 5;
 
