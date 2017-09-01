@@ -2,7 +2,7 @@
 
 export const HOME_PAGE_ROUTE = '/'
 export const MY_PROJECTS_ROUTE = '/my-projects'
-export const SAVED_PROJECTS_ROUTE = './saved-projects'
+export const SAVED_PROJECTS_ROUTE = '/saved-projects'
 export const PROFILE_PAGE_ROUTE = '/profile'
 export const LOGOUT_PAGE_ROUTE = '/logout'
 

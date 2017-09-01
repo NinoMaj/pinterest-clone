@@ -43,7 +43,7 @@ export const homePage = (user: Object, projectsInitialState: Object) =>
 export const profilePage = (user: Object) =>
   user ? { user: userInfo(user) } : { user: { logged: false } }
 
-export const myProjectsPage = (user: Object, projectsInitialState: Object) =>
+export const myProjectsPages = (user: Object, projectsInitialState: Object) =>
   user ?
   {
     user: userInfo(user),

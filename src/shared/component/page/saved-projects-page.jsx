@@ -19,7 +19,7 @@ const SavedProjectsPage = () => (
     />
     <div className="row">
       <div className="col-12">
-        <h3>My projects:</h3>
+        <h3>Saved projects:</h3>
         <Gallery page={SAVED_PROJECTS_ROUTE} />
       </div>
     </div>
