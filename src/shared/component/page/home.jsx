@@ -9,10 +9,10 @@ import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../../container/gallery'
 
 const HomePage = () => (
-  <div className="container mt-5">
+  <div className="container col-12 mt-5">
     <Helmet
       meta={[
-        { name: 'description', content: '{Pinerest clone app' },
+        { name: 'description', content: 'Chingu Showcase' },
         { property: 'og:title', content: APP_NAME },
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
       ]}

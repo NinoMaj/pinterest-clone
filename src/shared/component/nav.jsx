@@ -20,7 +20,8 @@ const handleNavLinkClick = () => {
 }
 
 const Button = styled.button`
-    cursor: pointer;
+  cursor: pointer;
+  font-family: inherit;
 `
 
 type Props = {
@@ -41,13 +42,13 @@ const Nav = ({ user }: Props) => {
     },
     {
       route: PROFILE_PAGE_ROUTE,
-      icon: <i className="fa fa-user-o fa-lg" title="Profile" />,
-      label: ' Profile',
+      icon: <i className="fa fa-user-o fa-lg fa-fw" title="Profile" />,
+      label: 'Profile',
     },
     {
       route: LOGOUT_PAGE_ROUTE,
-      icon: <i className="fa fa-power-off fa-lg" title="Logout" />,
-      label: ' Logout',
+      icon: <i className="fa fa-power-off fa-lg fa-fw" title="Logout" />,
+      label: 'Logout',
     },
   ]
 
@@ -70,15 +71,22 @@ const Nav = ({ user }: Props) => {
     </Button>)
 
   return (
-    <nav className="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-inverse">
+    <nav className="navbar navbar-toggleable navbar-inverse fixed-top bg-inverse">
 
-      <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+      <button
+        className="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarLinks"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span className="navbar-toggler-icon" />
       </button>
 
       <Link to={HOME_PAGE_ROUTE} className="navbar-brand">{APP_NAME}</Link>
 
-      <div className="js-navbar-collapse collapse navbar-collapse">
+      <div className="collapse navbar-collapse" id="navbarLinks">
         <ul className="navbar-nav ml-auto">
           {userNav}
         </ul>

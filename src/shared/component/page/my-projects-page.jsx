@@ -9,7 +9,7 @@ import Gallery from '../../container/gallery'
 const title = 'My projects page'
 
 const MyProjectsPage = () => (
-  <div className="container mt-5">
+  <div className="container col-12 mt-5">
     <Helmet
       title={title}
       meta={[

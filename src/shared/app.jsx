@@ -29,6 +29,7 @@ injectTapEventPlugin()
 
 const Container = styled.div`
   padding-top: 54px;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif;
 `
 
 type Props = {

@@ -7,11 +7,12 @@ import ItemImage from './item-image'
 import ItemInfo from './item-info'
 
 const ItemContainer = styled.div`
-  background-color: #292b2c;
-  color: #fff;
-  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px 1px rgba(25,25,25,0.2);
+  color: #000;
   margin: 5px;
-  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+  width: 250px;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif;
 `
 
 type Props = {
@@ -41,7 +42,7 @@ const Item = ({
   deleteProject,
   pinProject,
 }: Props) => (
-  <ItemContainer className="grid-item" >
+  <ItemContainer>
     <ItemImage
       description={description}
       source={imgUrl}
