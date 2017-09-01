@@ -9,6 +9,7 @@ import { APP_NAME } from '../config'
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
+  SAVED_PROJECTS_ROUTE,
   PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from '../routes'
@@ -31,6 +32,11 @@ const Nav = ({ user }: Props) => {
     {
       route: MY_PROJECTS_ROUTE,
       label: 'My projects',
+      icon: <span />,
+    },
+    {
+      route: SAVED_PROJECTS_ROUTE,
+      label: 'Saved projects',
       icon: <span />,
     },
     {
