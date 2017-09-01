@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE } from '../routes'
+import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE, SAVED_PROJECTS_ROUTE } from '../routes'
 import Item from '../component/item'
-import AddProjectModal from '..//component/add-project-modal'
+import AddProjectModal from '../component/add-project-modal'
 import AddProjectButton from '../component/add-project-button'
 import { addProject, deleteProject, pinProject, editProject } from '../actions/projectActions'
 import { displayNotification } from '../actions/notificationActions'
@@ -102,6 +102,23 @@ class Gallery extends Component {
             allowDeleting={false}
             pinProject={() => this.handlePinningProject(project._id)}
           />
+        ))
+      } else if (page === SAVED_PROJECTS_ROUTE) {
+        childElements = projects
+          .filter(project => project.pinnedBy.includes(userId))
+          .map(savedProject => (
+            <Item
+              key={savedProject._id}
+              author={savedProject.author}
+              title={savedProject.title}
+              description={savedProject.description}
+              projectUrl={savedProject.projectUrl}
+              imgUrl={savedProject.imgUrl}
+              pinCount={savedProject.pinnedBy.length}
+              allowPinning={false}
+              allowDeleting={false}
+              pinProject={() => this.handlePinningProject(savedProject._id)}
+            />
         ))
       }
     }

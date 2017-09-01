@@ -2,7 +2,7 @@
 
 import {
   homePage,
-  myProjectsPage,
+  myProjectsPages,
   profilePage,
   logoutPage,
 } from './controller'
@@ -10,6 +10,7 @@ import {
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
+  SAVED_PROJECTS_ROUTE,
   PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
   AUTH_TWITTER,
@@ -71,7 +72,30 @@ export default (app: Object, passport: Object) => {
     })
 
     initialStatePromise.then((projectsInitialState) => {
-      res.send(renderApp(req.url, req, myProjectsPage(req.user, projectsInitialState)))
+      res.send(renderApp(req.url, req, myProjectsPages(req.user, projectsInitialState)))
+    })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('Get projects error', JSON.stringify(err))
+      })
+  })
+
+  app.get(SAVED_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
+    const initialStatePromise = new Promise((resolve, reject) => {
+      const promise = Project.find({}).exec()
+
+      promise.then(projectsInitialState => (
+        resolve(projectsInitialState)
+      ))
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log('Error in get projects API:', err)
+          reject(err)
+        })
+    })
+
+    initialStatePromise.then((projectsInitialState) => {
+      res.send(renderApp(req.url, req, myProjectsPages(req.user, projectsInitialState)))
     })
       .catch((err) => {
         // eslint-disable-next-line no-console
