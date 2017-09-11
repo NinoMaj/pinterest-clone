@@ -67,7 +67,7 @@ const ItemInfo = ({ author, title, projectUrl, pinCount }: Props) => (
       </AuthorLogo>
 
       <AuthorName>
-        {author}
+        <Link href={`/user/${author}`}>{author}</Link>
       </AuthorName>
 
       <PinCount>

@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import { GET_USER_ROUTE, USER_PAGE_ROUTE } from '../../routes'
+import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../../container/gallery'
 
 const Img = styled.img`
@@ -53,6 +54,7 @@ class UserPage extends Component {
               </div>
             }
 
+            <LoginModal />
             <Gallery page={USER_PAGE_ROUTE} profileUserName={this.props.showUser} />
 
           </div>
