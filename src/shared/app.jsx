@@ -13,6 +13,7 @@ import Nav from './component/nav'
 import Notification from './container/notification'
 import HomePage from './component/page/home'
 import MyProjectsPage from './component/page/my-projects-page'
+import SavedProjectsPage from './component/page/saved-projects-page'
 import ProfilePage from './component/page/profile-page'
 import UserPage from './component/page/user-page'
 import LogoutPage from './component/page/logout-page'
@@ -20,6 +21,7 @@ import NotFoundPage from './component/page/not-found'
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
+  SAVED_PROJECTS_ROUTE,
   PROFILE_PAGE_ROUTE,
   USER_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
@@ -51,6 +53,10 @@ const App = ({ user, location }: Props) => (
       <Route
         path={MY_PROJECTS_ROUTE}
         render={history => <MyProjectsPage history={history.history} />}
+      />
+      <Route
+        path={SAVED_PROJECTS_ROUTE}
+        render={history => <SavedProjectsPage history={history.history} />}
       />
       <Route
         path={PROFILE_PAGE_ROUTE}

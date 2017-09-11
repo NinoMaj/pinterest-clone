@@ -11,6 +11,7 @@ import {
 import {
   HOME_PAGE_ROUTE,
   MY_PROJECTS_ROUTE,
+  SAVED_PROJECTS_ROUTE,
   PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
   USER_PAGE_ROUTE,
@@ -63,6 +64,10 @@ export default (app: Object, passport: Object) => {
   })
 
   app.get(MY_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
+    resolvePromise(req, res, myProjectsPage)
+
+
+  app.get(SAVED_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
     resolvePromise(req, res, myProjectsPage)
   })
 
