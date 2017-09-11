@@ -5,6 +5,7 @@ import {
   myProjectsPage,
   profilePage,
   logoutPage,
+  userPage,
 } from './controller'
 
 import {
@@ -12,6 +13,7 @@ import {
   MY_PROJECTS_ROUTE,
   PROFILE_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
+  USER_PAGE_ROUTE,
   AUTH_TWITTER,
   AUTH_TWITTER_CALLBACK,
   AUTH_GOOGLE,
@@ -32,55 +34,44 @@ function isLoggedIn(req, res, next) {
   return req.isAuthenticated() ? next() : res.redirect('/')
 }
 
-export default (app: Object, passport: Object) => {
-  app.get(HOME_PAGE_ROUTE, (req, res) => {
-    const initialStatePromise = new Promise((resolve, reject) => {
-      const promise = Project.find({}).exec()
+function resolvePromise(req, res, controller) {
+  const initialStatePromise = new Promise((resolve, reject) => {
+    const promise = Project.find({}).exec()
 
-      promise.then(projectsInitialState => (
-        resolve(projectsInitialState)
-      ))
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log('Error in get projects API:', err)
-        reject(err)
-      })
-    })
-
-    initialStatePromise.then((projectsInitialState) => {
-      res.send(renderApp(req.url, req, homePage(req.user, projectsInitialState)))
-    })
+    promise.then(projectsInitialState => (
+      resolve(projectsInitialState)
+    ))
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.error('Get projects error', JSON.stringify(err))
+      console.log('Error in get projects API:', err)
+      reject(err)
     })
   })
 
+  initialStatePromise.then((projectsInitialState) => {
+    res.send(renderApp(req.url, req, controller(req.user, projectsInitialState)))
+  })
+  .catch((err) => {
+    // eslint-disable-next-line no-console
+    console.error('Get projects error', JSON.stringify(err))
+  })
+}
+
+export default (app: Object, passport: Object) => {
+  app.get(HOME_PAGE_ROUTE, (req, res) => {
+    resolvePromise(req, res, homePage)
+  })
+
   app.get(MY_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
-    const initialStatePromise = new Promise((resolve, reject) => {
-      const promise = Project.find({}).exec()
-
-      promise.then(projectsInitialState => (
-        resolve(projectsInitialState)
-      ))
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log('Error in get projects API:', err)
-          reject(err)
-        })
-    })
-
-    initialStatePromise.then((projectsInitialState) => {
-      res.send(renderApp(req.url, req, myProjectsPage(req.user, projectsInitialState)))
-    })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error('Get projects error', JSON.stringify(err))
-      })
+    resolvePromise(req, res, myProjectsPage)
   })
 
   app.get(PROFILE_PAGE_ROUTE, isLoggedIn, (req, res) => {
     res.send(renderApp(req.url, req, profilePage(req.user)))
+  })
+
+  app.get(`${USER_PAGE_ROUTE}/:user`, (req, res) => {
+    resolvePromise(req, res, userPage)
   })
 
   app.get(LOGOUT_PAGE_ROUTE, isLoggedIn, (req, res) => {

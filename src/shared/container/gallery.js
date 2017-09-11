@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE } from '../routes'
+import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE, USER_PAGE_ROUTE } from '../routes'
 import Item from '../component/item'
 import AddProjectModal from '..//component/add-project-modal'
 import AddProjectButton from '../component/add-project-button'
@@ -27,6 +27,7 @@ const Container = styled.div`
 //   page: string,
 //   userId: any,
 //   userName: string,
+//   profileUserName: string,
 //   isLogged: boolean,
 //   addProjectAction: Function,
 //   deleteProjectAction: Function,
@@ -48,6 +49,7 @@ class Gallery extends Component {
 //   page,
 //   userId,
 //   userName,
+//   profileUserName,
 //   isLogged,
 //   addProjectAction,
 //   deleteProjectAction,
@@ -58,7 +60,7 @@ class Gallery extends Component {
 // : Props) {
 
   setChildElements() {
-    const { projects, page, userName, userId, isLogged } = this.props
+    const { projects, page, userName, userId, isLogged, profileUserName } = this.props
     let childElements = null
     if (projects.length > 0) {
       if (page === MY_PROJECTS_ROUTE) {
@@ -102,6 +104,26 @@ class Gallery extends Component {
             allowDeleting={false}
             pinProject={() => this.handlePinningProject(project._id)}
           />
+        ))
+      } else if (page === USER_PAGE_ROUTE) {
+        childElements = projects.filter(
+          project => project.author === profileUserName).map(project => (
+            <Item
+              key={project._id}
+              author={project.author}
+              title={project.title}
+              description={project.description}
+              projectUrl={project.projectUrl}
+              imgUrl={project.imgUrl}
+              pinCount={project.pinnedBy.length}
+              allowPinning={
+                !project.pinnedBy.includes(userId) &&
+                project.author !== profileUserName &&
+                isLogged
+              }
+              allowDeleting={false}
+              pinProject={() => this.handlePinningProject(project._id)}
+            />
         ))
       }
     }

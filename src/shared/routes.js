@@ -4,6 +4,7 @@ export const HOME_PAGE_ROUTE = '/'
 export const MY_PROJECTS_ROUTE = '/my-projects'
 export const PROFILE_PAGE_ROUTE = '/profile'
 export const LOGOUT_PAGE_ROUTE = '/logout'
+export const USER_PAGE_ROUTE = '/user'
 
 export const AUTH_TWITTER = '/auth/twitter'
 export const AUTH_TWITTER_CALLBACK = '/auth/twitter/callback'
@@ -19,3 +20,4 @@ export const PIN_PROJECT_ROUTE = (project: string, user: string) => `/api/projec
 export const DELETE_PROJECT_ROUTE = (project: string) => `/api/projects/delete-project/${project}`
 
 export const ADD_PROFILE_ROUTE = 'api/profile/add-profile'
+export const GET_USER_ROUTE = (user: string) => `/api/profile/${user}`
