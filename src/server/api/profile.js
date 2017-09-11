@@ -32,4 +32,26 @@ router.post('/add-profile', (req, res) => {
   })
 })
 
+router.get('/:user', (req, res) => {
+  const promise = User.findOne({ userName: req.params.user }).exec()
+  promise
+    .then((user) => {
+      const publicUser = {
+        id: user._id,
+        userName: user.userName,
+        fullName: user.fullName,
+        country: user.country,
+        city: user.city,
+        state: user.state,
+      }
+
+      res.status(200).send(publicUser)
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log('Error in get user profile API:', err)
+      return res.status(500).send('Error while getting user:', err)
+    })
+})
+
 module.exports = router

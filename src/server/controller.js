@@ -24,7 +24,7 @@ const userInfo = user =>
     },
   })
 
-export const homePage = (user: Object, projectsInitialState: Object) =>
+const setData = (user: Object, projectsInitialState: Object) =>
   user ?
   {
     user: userInfo(user),
@@ -39,24 +39,21 @@ export const homePage = (user: Object, projectsInitialState: Object) =>
       projects: projectsInitialState,
     },
   }
+
+export const homePage = (user: Object, projectsInitialState: Object) =>
+  setData(user: Object, projectsInitialState: Object)
+
+export const myProjectsPage = (user: Object, projectsInitialState: Object) =>
+  setData(user: Object, projectsInitialState: Object)
+
+export const userPage = (user: Object, projectsInitialState: Object) =>
+  ({
+    projects: {
+      projects: projectsInitialState,
+    },
+  })
 
 export const profilePage = (user: Object) =>
   user ? { user: userInfo(user) } : { user: { logged: false } }
-
-export const myProjectsPages = (user: Object, projectsInitialState: Object) =>
-  user ?
-  {
-    user: userInfo(user),
-    projects: {
-      projects: projectsInitialState,
-    },
-  }
-  :
-  {
-    user: { logged: false },
-    projects: {
-      projects: projectsInitialState,
-    },
-  }
 
 export const logoutPage = () => null

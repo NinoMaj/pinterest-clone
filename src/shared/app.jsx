@@ -15,6 +15,7 @@ import HomePage from './component/page/home'
 import MyProjectsPage from './component/page/my-projects-page'
 import SavedProjectsPage from './component/page/saved-projects-page'
 import ProfilePage from './component/page/profile-page'
+import UserPage from './component/page/user-page'
 import LogoutPage from './component/page/logout-page'
 import NotFoundPage from './component/page/not-found'
 import {
@@ -22,6 +23,7 @@ import {
   MY_PROJECTS_ROUTE,
   SAVED_PROJECTS_ROUTE,
   PROFILE_PAGE_ROUTE,
+  USER_PAGE_ROUTE,
   LOGOUT_PAGE_ROUTE,
 } from './routes'
 
@@ -33,10 +35,11 @@ const Container = styled.div`
 `
 
 type Props = {
-  user: object,
+  user: Object,
+  location: ?Object,
 }
 
-const App = ({ user }: Props) => (
+const App = ({ user, location }: Props) => (
   <Container>
     <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
     <Nav user={user.logged} />
@@ -58,6 +61,12 @@ const App = ({ user }: Props) => (
       <Route
         path={PROFILE_PAGE_ROUTE}
         render={history => <ProfilePage user={user} history={history.history} />}
+      />
+      <Route
+        path={USER_PAGE_ROUTE}
+        render={history => (
+          <UserPage history={history.history} showUser={location.pathname.split('/')[2]} />
+        )}
       />
       <Route
         path={LOGOUT_PAGE_ROUTE}
