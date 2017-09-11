@@ -65,7 +65,7 @@ export default (app: Object, passport: Object) => {
 
   app.get(MY_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
     resolvePromise(req, res, myProjectsPage)
-
+  })
 
   app.get(SAVED_PROJECTS_ROUTE, isLoggedIn, (req, res) => {
     resolvePromise(req, res, myProjectsPage)
