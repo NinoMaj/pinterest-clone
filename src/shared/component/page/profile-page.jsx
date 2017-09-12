@@ -47,6 +47,15 @@ type Props = {
   user: object,
 }
 
+// Function to build location string depending on which of city, state and country
+// fields are available. If all fields are empty, return 'No location'
+const setLocation = (city, state, country) => {
+  const cityStr = city ? `${city}, ` : ''
+  const stateStr = state ? `${state}, ` : ''
+  const location = city || state || country
+  return location ? `${cityStr}${stateStr}${country || ''}` : 'No location'
+}
+
 const ProfilePage = ({ user }: Props) => (
   <div className="container mt-4">
     <Helmet
@@ -77,7 +86,7 @@ const ProfilePage = ({ user }: Props) => (
 
           <InfoDiv>
             <i className="fa fa-map-marker fa-fw" aria-hidden="true" />
-            Location: {user.city}, {user.state} - {user.country}
+            {setLocation(user.city, user.state, user.country)}
           </InfoDiv>
 
           <Button

@@ -8,12 +8,31 @@ import { GET_USER_ROUTE, USER_PAGE_ROUTE } from '../../routes'
 import LoginModal from '../LoginModal/LoginModal'
 import Gallery from '../../container/gallery'
 
+const UserInfoDiv = styled.div`
+  text-align: center;
+`
+
 const Img = styled.img`
-  height: 150px;
-  width: 150px;
-  border-radius: 75px;
-  border: 3px solid green;
-  margin-right: 25px;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  border: 2px solid green;
+`
+
+const Name = styled.div`
+  font-size: 22px;
+`
+
+const LocationDiv = styled.div`
+  font-size: 14px;
+  color: #999;
+  line-height: 10px;
+`
+
+const ProjectsTitle = styled.div`
+  font-size: 20px;
+  text-align: center;
+  margin: 25px auto 10px;
 `
 
 class UserPage extends Component {
@@ -30,9 +49,19 @@ class UserPage extends Component {
       .then(json => this.setState({ user: json }))
   }
 
+  // Function to build location string depending on which of city, state and country
+  // fields are available. If all fields are empty, return 'No location'
+  setLocation() {
+    const { city, state, country } = this.state.user
+    const cityStr = city ? `${city}, ` : ''
+    const stateStr = state ? `${state}, ` : ''
+    const location = city || state || country
+    return location ? `${cityStr}${stateStr}${country || ''}` : 'No location'
+  }
+
   render() {
-    const title = `${this.state.user.userName}'s Profile`
-    const { user } = this.state
+    const { userName, fullName } = this.state.user
+    const title = `${userName}'s Profile`
     return (
       <div className="container mt-4">
         <Helmet
@@ -45,16 +74,16 @@ class UserPage extends Component {
         <div className="row">
           <div className="col-12">
 
-            {
-              <div className="userInfo">
-                <Img src="/static/images/chingu-logo.png" alt="user avatar" />
-                <div>{user.userName}</div>
-                <div>{user.fullName}</div>
-                <div>{user.city}, {user.state} - {user.country}</div>
-              </div>
-            }
+            <UserInfoDiv className="userInfo">
+              <Img src="/static/images/chingu-logo.png" alt="user avatar" />
+              <Name><b>{userName}</b> {fullName ? `(${fullName})` : ''}</Name>
+              <LocationDiv>
+                {this.setLocation()}
+              </LocationDiv>
+            </UserInfoDiv>
 
             <LoginModal />
+            <ProjectsTitle>Projects</ProjectsTitle>
             <Gallery page={USER_PAGE_ROUTE} profileUserName={this.props.showUser} />
 
           </div>
