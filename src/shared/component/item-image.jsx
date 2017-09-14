@@ -37,13 +37,6 @@ const Button = styled.div`
   }
 `
 
-const DeleteButton = Button.extend`
-
-`
-
-const PinButton = Button.extend`
-`
-
 const EditButton = Button.extend`
   right: 45px;
 `
@@ -73,9 +66,9 @@ type Props = {
   height: string,
   allowPinning: boolean,
   allowDeleting: boolean,
-  // editProject: Function, // As this changes depending of page, are not always required
-  // deleteProject: Function,
-  // pinProject: Function,
+  editProject: ?Function,
+  setDeleteProject: ?Function,
+  pinProject: ?Function,
 }
 
 const ItemImage = ({
@@ -85,13 +78,13 @@ const ItemImage = ({
   allowPinning,
   allowDeleting,
   editProject,
-  deleteProject,
+  setDeleteProject,
   pinProject }: Props) => (
     <ImgContainer height={height}>
       {allowPinning &&
-        <PinButton type="button" className="btn btn-success" onClick={pinProject}>
+        <Button type="button" className="btn btn-success" onClick={pinProject}>
           Save <i className="fa fa-thumb-tack fa-lg" aria-hidden="true" />
-        </PinButton>
+        </Button>
       }
       {allowDeleting &&
         <div>
@@ -105,9 +98,15 @@ const ItemImage = ({
             <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true" />
           </EditButton>
 
-          <DeleteButton type="button" className="btn btn-danger" onClick={deleteProject}>
+          <Button
+            type="button"
+            className="btn btn-danger"
+            data-toggle="modal"
+            data-target="#confirmationPromptModal"
+            onClick={setDeleteProject}
+          >
             <i className="fa fa-trash fa-lg" aria-hidden="true" />
-          </DeleteButton>
+          </Button>
         </div>
       }
 
