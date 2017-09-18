@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import $ from 'jquery'
 
 class AddProject extends Component {
   constructor(props) {
@@ -54,9 +55,7 @@ class AddProject extends Component {
       'Your project has been submitted successfully',
     )
 
-    document.querySelector('.modal').classList.remove('show')
-    document.querySelector('.fade.show').style.opacity = '0'
-    // $('.modal').modal('hide') jQuery solution
+    $('#addProjectModal').modal('hide') // Hide modal on submit
     event.preventDefault()
   }
 

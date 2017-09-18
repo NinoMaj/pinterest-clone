@@ -3,10 +3,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 
 import { HOME_PAGE_ROUTE, MY_PROJECTS_ROUTE, SAVED_PROJECTS_ROUTE, USER_PAGE_ROUTE } from '../routes'
 
 import Item from '../component/item'
+import DeleteProjectModal from '../component/delete-project-modal'
 import AddProjectModal from '../component/add-project-modal'
 import AddProjectButton from '../component/add-project-button'
 import { addProject, deleteProject, pinProject, editProject } from '../actions/projectActions'
@@ -43,22 +45,9 @@ class Gallery extends Component {
 
     this.state = {
       projectEdit: { title: '', description: '', projectUrl: '', projectId: '' },
+      projectToDeleteID: '',
     }
   }
-
-//   {projects,
-//   page,
-//   userId,
-//   userName,
-//   profileUserName,
-//   isLogged,
-//   addProjectAction,
-//   deleteProjectAction,
-//   pinProjectAction,
-//   editProjectAction,
-//   displayNotificationAction,
-// } = this.props
-// : Props) {
 
   setChildElements() {
     const { projects, page, userName, userId, isLogged, profileUserName } = this.props
@@ -68,7 +57,7 @@ class Gallery extends Component {
         childElements = projects.filter(project => project.author === userName).map(myProject => (
           <Item
             key={myProject._id}
-            author={'me'}
+            author={myProject.author}
             title={myProject.title}
             description={myProject.description}
             projectUrl={myProject.projectUrl}
@@ -76,7 +65,7 @@ class Gallery extends Component {
             pinCount={myProject.pinnedBy.length}
             allowPinning={false}
             allowDeleting
-            deleteProject={() => this.handleDeletingProject(myProject._id)}
+            setDeleteProject={() => this.setProjectToDeleteID(myProject._id)}
             editProject={() =>
               this.handleEditingProject(
                 myProject._id,
@@ -107,8 +96,9 @@ class Gallery extends Component {
           />
         ))
       } else if (page === USER_PAGE_ROUTE) {
-        childElements = projects.filter(
-          project => project.author === profileUserName).map(project => (
+        childElements = projects
+          .filter(project => project.author === profileUserName)
+          .map(project => (
             <Item
               key={project._id}
               author={project.author}
@@ -148,6 +138,10 @@ class Gallery extends Component {
     return childElements
   }
 
+  setProjectToDeleteID(projectToDeleteID) {
+    this.setState({ projectToDeleteID })
+  }
+
   handlePinningProject(projectId: string) {
     this.props.pinProjectAction(projectId, this.props.userId)
     this.props.displayNotificationAction(
@@ -157,13 +151,15 @@ class Gallery extends Component {
     )
   }
 
-  handleDeletingProject(projectId: string) {
-    this.props.deleteProjectAction(projectId)
+  handleDeletingProject() {
+    this.props.deleteProjectAction(this.state.projectToDeleteID)
     this.props.displayNotificationAction(
       'info',
       'Project deleted',
       'The project has been successfully deleted',
     )
+
+    $('#confirmationPromptModal').modal('hide') // Hide modal on deleting
   }
 
   handleEditingProject(projectId, title, description, projectUrl) {
@@ -178,7 +174,6 @@ class Gallery extends Component {
     })
   }
 
-
   render() {
     const childElements = this.setChildElements()
     return (
@@ -186,6 +181,11 @@ class Gallery extends Component {
         {this.props.page === MY_PROJECTS_ROUTE &&
           <div>
             <AddProjectButton />
+
+            <DeleteProjectModal
+              handleDeletingProject={() => this.handleDeletingProject()}
+            />
+
             <AddProjectModal
               addProject={this.props.addProjectAction}
               editProject={this.props.editProjectAction}

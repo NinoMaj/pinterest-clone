@@ -24,9 +24,9 @@ type Props = {
   pinCount: number,
   allowPinning: boolean,
   allowDeleting: boolean,
-  // editProject: any, // As this changes depending of page, are not always required
-  // deleteProject: any,
-  // pinProject: any,
+  editProject: ?Function,
+  setDeleteProject: ?Function,
+  pinProject: ?Function,
 }
 
 const Item = ({
@@ -39,7 +39,7 @@ const Item = ({
   allowPinning,
   allowDeleting,
   editProject,
-  deleteProject,
+  setDeleteProject,
   pinProject,
 }: Props) => (
   <ItemContainer>
@@ -50,7 +50,7 @@ const Item = ({
       allowPinning={allowPinning}
       allowDeleting={allowDeleting}
       editProject={editProject}
-      deleteProject={deleteProject}
+      setDeleteProject={setDeleteProject}
       pinProject={pinProject}
     />
     <ItemInfo

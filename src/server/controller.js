@@ -47,11 +47,7 @@ export const myProjectsPage = (user: Object, projectsInitialState: Object) =>
   setData(user: Object, projectsInitialState: Object)
 
 export const userPage = (user: Object, projectsInitialState: Object) =>
-  ({
-    projects: {
-      projects: projectsInitialState,
-    },
-  })
+  setData(user: Object, projectsInitialState: Object)
 
 export const profilePage = (user: Object) =>
   user ? { user: userInfo(user) } : { user: { logged: false } }
